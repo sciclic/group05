@@ -13,118 +13,36 @@ output:
 
 ## Introduction
 
-Follow [this example](https://github.com/STAT547-UBC-2019-20/demo_project/blob/milestone1/docs/milestone1-547-example.md). [Here](https://www.nature.com/articles/d41586-019-03459-7) is the Nature paper, and [this](https://figshare.com/s/74a5ea79d76ad66a8af8) is where the dataset was downloaded from. Milestone 1 [guidelines](https://stat545.stat.ubc.ca/evaluation/milestone_01/milestone_01/).
+For the past five years, the iconic science journal Nature has launched a survey for PhD students in STEM fields to share their experience in graduate school, hoping to illuminate the goals, challenges, and sources of satisfaction for doctoral students across seven continents. Last year's survey collected data from over 6000 graduate students, which constitutes the highest response rate in the survey's history. The [full data](https://figshare.com/s/74a5ea79d76ad66a8af8) from the survey was made publicly available following publication of an [article](https://www.nature.com/articles/d41586-019-03459-7) discussing the results. It is interesting to note that the survey was offered in English, Spanish, Chinese, French, and Portuguese - open-form questions have not been translated to English if answered by the participant in another language. Available materials include anonymysed raw data, the questionnaire that was provided to PhD students, and a presentation of the survey data. 
 
-```{r setup, include=FALSE}
+```{r setup, warning=FALSE, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(knitr)
 library(tidyverse)
 library(dplyr)
 library(plyr)
-library(corrplot)
-library(foreign)
-library(janitor)
-library(tidyr)
+library(kableExtra)
 library(here)
 ```
 
-```{r read, include=FALSE}
-# see what the here path is 
-here() 
-# read in dataset
-survey_data <- readxl::read_xlsx(here::here("docs", "Nature_PhD_Survey.xlsx"))
-# see dimensions
-dim(survey_data) # 6813 by 274
-```
-
-```{r clean, include=FALSE}
-# fix names for easier analysis (. and : don't read well)
-survey_data <- janitor::clean_names(survey_data)
-
-# fix data
-## remove columns that are not relevant for analysis
-survey_data <- 
-  survey_data %>%
-  select(-c("id_format", # "smartphone", "tablet", "snap"
-            "id_completed", # "case completed in snap" / "completed" / "NA"
-            "id_site", # "NA", "newstory", "social1", "instagram", "pilot"...
-            "id_start", # time that the interview started at
-            "id_end_date", # date of the interview 
-            "id_end", # time that the interview ended at
-            "id_time", # time of the interview
-            "q2", # "hidden"
-            "q3_a", # other reasons to join a graduate program (out of given options), it's interesting but all are different so hard to use for analysis
-            "q12_1", # "NA", "to study at a specific university" 
-            "q12_a", # same as q3_a, but "other reasons to study outside your country of upbringing"
-            "q14_a", # same as above, "other reasons to have a job"
-            "q16", # "Is there anything else not mentioned that has concerned you since you started your PhD? 
-            "q17_a", # "if other, please specify - what do you enjoy more about life as a PhD student?"
-            "q26", # "overall, how would you describe the academic system, based on your PhD experience so far?" - open question
-            "q35_a", # if other, please specify - about feeling discriminated
-            "q39_a", # other reasons why you may be unlikely to pursue an academic career
-            "q40_a", # specify what other positions you may occupy after completing your degree
-            "q44_a", # other reasons why you may want to pursue a research career
-            "q45_a", # "how did you arrive at your current career decision?" open q
-            "q46_a", # "How do you learn about available career opportunities that are beyond academia?" open q
-            "q47_a", # "Which of the following 3 things would you say are the most difficult for PhD students in your discipline?" open q
-            "q48_a", # "Which of the following would you say are the most difficult for PhD students in the country where you are studying?" open q
-            "q49_a", # "Which of the following resources do you think PhD students need the most in order to establish a satisfying career?" open q
-            "q52_a", # "Which, if any, of the following activities have you done to advance your career?" open q
-            "q53_a", # other social media networks that may help you build your career
-            "q54_a", # other things that you would differently if starting over your program
-            "q55", # open q
-            "q58_a", # other ethnicity that best describes you
-            "q59_a", # other responsibilities you may have
-            "q60", # open q
-            "q62", "q63", "q64", # cols asking whether it's ok for nature & springer to contact in the future
-            "q65_a")) # numbers replacing names for anonymity
-
-ncol(survey_data) # 239 - dropped 35 rows at this point
-
-# changing first row to be header (header was non-informative, all questions were just numbered as "Q1", "Q2", "Q3"...)
-colnames(survey_data) <- survey_data[1,]
-survey_data <- survey_data[-1,]
-
-# drop columns with only NA values
-survey_data <- janitor::remove_empty(survey_data, which="cols")
-ncol(survey_data) # 233 - 6 columns were dropped
-
-# fix names again for easier analysis (many have spaces)
-survey_data <- janitor::clean_names(survey_data)
-```
-
-Some columns are repeated several times, with each column having a single unique value. For example, columns 15-24 are "What prompted you to study outside your country of upbringing?", but each column only has 1 reason as an answer. Therefore, it seems intuitive to combine these for posterior analysis.
-
-```{r unite, include=FALSE}
-# see colnames
-colnames(survey_data)
-# change blanks to NA
-survey_data <- survey_data %>%
-mutate_at(vars(colnames(.)),
-        .funs = funs(ifelse(.=="", NA, as.character(.))))
-# what_prompted_you_to_study_outside_your_country_of_upbringing - also, couldn't figure out how to use coalesce() with column indices rather than naming, need to make code better!
-survey_data <-
-  survey_data %>%
-  mutate(reasons_to_study_outside_your_country_of_upbringing = coalesce(what_prompted_you_to_study_outside_your_country_of_upbringing, what_prompted_you_to_study_outside_your_country_of_upbringing_2, what_prompted_you_to_study_outside_your_country_of_upbringing_3, what_prompted_you_to_study_outside_your_country_of_upbringing_4, what_prompted_you_to_study_outside_your_country_of_upbringing_5, what_prompted_you_to_study_outside_your_country_of_upbringing_6, what_prompted_you_to_study_outside_your_country_of_upbringing_7, what_prompted_you_to_study_outside_your_country_of_upbringing_8, what_prompted_you_to_study_outside_your_country_of_upbringing_9, what_prompted_you_to_study_outside_your_country_of_upbringing_10)) %>%
-  select_at(vars(-c(starts_with("what_prompted")))) # drop old columns
-
-survey_data <-
-  survey_data %>%
-  mutate(who_was_the_perpetrator = coalesce(who_was_the_perpetrator_s, who_was_the_perpetrator_s_2, who_was_the_perpetrator_s_3, who_was_the_perpetrator_s_4, who_was_the_perpetrator_s_5, who_was_the_perpetrator_s_6, who_was_the_perpetrator_s_7)) %>%
-  select_at(vars(-c(starts_with("who_was_the")))) # drop old columns
-
-
-survey_data <-
-  survey_data %>%
-  mutate(which_of_the_following_have_you_experienced = coalesce(which_of_the_following_have_you_experienced, which_of_the_following_have_you_experienced_2, which_of_the_following_have_you_experienced_3, which_of_the_following_have_you_experienced_4, which_of_the_following_have_you_experienced_5, which_of_the_following_have_you_experienced_6, which_of_the_following_have_you_experienced_7, which_of_the_following_have_you_experienced_8, which_of_the_following_have_you_experienced_9))
-survey_data <- survey_data[,-c(76:84)] # drop old columns
-
-# save intermediate object at this point
-write.csv(survey_data, here::here("docs", "survey_data.csv"))
-```
-
-
 ## Data description
+
+According to the script with survey information that was provided, there were a total of 65 questions. Not all questions were mandatory, and there was a mix of single choice (yes/no), multiple choice (several options) and free-form questions. 
+
+In the dataset, each row represents an individual who participated in the survey, whereas each row represents a question. We have noticed some redundancy in the dataset column that will require substantial cleanup of the data as part of our next project milestone. For instance, Q12 ("What prompted you to study outside your country of upbringing?") was presented in the survey as a multiple choice question with 11 possible answers (a-k), with the last one (k) being open-form ("If other, please specify"). In the data frame, 11 rows correspond to Q12, each one composed of 2 values: NA, and 1/11 possible answers. As such, the column named Q12_1 only contains NA values and answer "(a) To study at a specific university"; whereas Q12_2 only contains NA values and answer "(b) Lack of funding opportunities in my home country", and so on. We plan on combining columns Q12_1:Q12_11 into a single Q12 column using dplyr::coalesce(), following the same rationale for other redundant columns in the dataset. In addition, open-form questions such as (k) in this specific example will be dropped due to the difficulty in analyzing this, and the fact that they contain answers in different languages.
+
+```{r survey-dataset, warning=FALSE}
+survey_data <- readxl::read_xlsx(here::here("docs", "Nature_PhD_Survey.xlsx"))
+dim(survey_data)
+```
+
+Due to this redundancy, the dimensions of the raw dataset when downloaded are 6812 rows (participants) by 274 columns (questions), whereas the actual survey only has 63 questions. Below is the complete list of questions, which is a simplified version of the Word document provided [here](https://figshare.com/s/74a5ea79d76ad66a8af8), which includes all the possible answers for each question. For simplicity, we have only included the question, its type, and the category it belongs to within the survey.
+
+```{r survey-questions, echo=FALSE, warning=FALSE, message=FALSE}
+survey_questions <- readxl::read_xlsx(here::here("docs", "survey_questions.xlsx"))
+dim(survey_questions) # 63 (questions) by 4 columns (question number, category, question, and type)
+knitr::kable(survey_questions) %>% kable_styling(bootstrap_options = "condensed", full_width=F, fixed_thead=TRUE) # print
+```
 
 ## Exploring the dataset
 
