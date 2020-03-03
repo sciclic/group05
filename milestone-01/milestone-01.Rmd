@@ -45,7 +45,24 @@ knitr::kable(survey_questions) %>% kable_styling(bootstrap_options = "condensed"
 ```
 
 ## Exploring the dataset
+```{r basic demographics, echo=FALSE, warning=FALSE, message=FALSE}
+
+survey_demographics <- survey_data[-1, ] #removing first row of data file, which contains question label and not participant data.
+
+ggplot(survey_demographics, aes(Q5)) +
+  geom_bar(width = .8, fill = "steelblue") +
+  coord_flip() +
+  xlab("Continent") +
+  ylab("Where do you currently live?") +
+  theme_minimal()
+```
+It would appear that most of the participants in this survey are from Europe, the Americas, or Asia. This is not very surprising, but is good to verify the sample is relatively representative of the distribution of higher education institutes around the world.
 
 ## Plan of Action
 
+
+
+
 ## References 
+
+
