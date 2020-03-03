@@ -46,6 +46,102 @@ knitr::kable(survey_questions) %>% kable_styling(bootstrap_options = "condensed"
 
 ## Exploring the dataset
 
+First let's take a look at some basic demographic information about the survey participants
+
+```{r basic demographics1, echo=FALSE, warning=FALSE, message=FALSE}
+
+survey_data2 <- survey_data[-1, ] #removing first row of data file, which contains question label and not participant data.
+
+ggplot(survey_data2, aes(Q5)) +
+  geom_bar(width = .8, fill = "steelblue") +
+  coord_flip() +
+  xlab("Continent") +
+  ylab("Number of Graduate Students") +
+  theme_minimal()
+```
+And just to view this as a percentage of our data frame...
+
+```{r}
+ggplot(survey_data2, aes(Q5)) +  
+  geom_bar(aes(y = (..count..)/sum(..count..)), fill = "steelblue") +
+  coord_flip() +
+  xlab("Continent") +
+  ylab("Percent of Graduate Students") +
+  theme_minimal()
+```
+
+It would appear that most of the participants in this survey are from Europe, the Americas, or Asia. This is not very surprising, but is good to verify the sample is relatively representative of the distribution of higher education institutes around the world.
+
+
+
+Next, I'm curious to see how many people are studying outside their country of birth...
+
+```{r basic demographics2, echo=FALSE, warning=FALSE, message=FALSE}
+
+ggplot(survey_data2, aes(Q4)) +
+  geom_bar(aes(y = (..count..)/sum(..count..)), fill = "steelblue") +
+  ylab("Percent of Graduate Students")
+  xlab("Are you studying in the country you grew up in?") +
+  theme_minimal()
+
+```
+
+We have been particularly interested in what this survey can tell us about grad school satisfaction and mental health throughout grad school. Let's take a look at some of this data...
+
+```{r mental_health, echo=FALSE, warning=FALSE, message=FALSE}
+
+survey_data2 <- survey_data2 %>% 
+  as_tibble() %>%
+  select(Q19.a:Q22.i) 
+
+ggplot(survey_data2, aes(Q19.a)) +
+  geom_bar(width = .8, fill = "steelblue") +
+  xlab("How satisfied are you with your decision to pursue a PhD?") +
+  ylab("Number of Graduate Students") +
+  theme_minimal()
+
+ggplot(survey_data2, aes(Q19.a)) +
+  geom_bar(width = .8, fill = "steelblue") +
+  xlab("How satisfied are you with your PhD experience?") +
+  ylab("Number of Graduate Students") +
+  theme_minimal()
+
+ggplot(survey_data2, aes(Q20)) +
+  geom_bar(width = .8, fill = "steelblue") +
+  xlab("Since the very start of your graduate school experience, would you say your level of satisfaction has:") +
+  ylab("Number of Graduate Students") +
+  theme_minimal()
+
+ggplot(survey_data2, aes(Q21.i)) +
+  geom_bar(width = .8, fill = "steelblue") +
+  xlab("Stipend / financial support") +
+  ylab("Number of Graduate Students") +
+  theme_minimal()
+
+ggplot(survey_data2, aes(Q22.a)) +
+  geom_bar(width = .8, fill = "steelblue") +
+  xlab("Vacation Time") +
+  ylab("Number of Graduate Students") +
+  theme_minimal()
+
+ggplot(survey_data2, aes(Q21.e)) +
+  geom_bar(width = .8, fill = "steelblue") +
+  xlab("Recognition from Supervisor") +
+  ylab("Number of Graduate Students") +
+  theme_minimal()
+```
+
 ## Plan of Action
 
+It would appear that, from sampling a few survey items, that people aren't necessarily thinking negatively about their PhD experience. Some of these items show variability curves that are relatively bell shaped, while others are a little more variable.
+
+We would have liked to run more in depth initial analysis, such as looking at correlations between items in the survey. However, the data needs extensive cleaning and organizing first. For instance, many of the cell values are taken not as numeric but as characters, making it difficult to run correlations at this stage. We are aware the next milestone project is more oriented towards data wrangling, and we would like to expand with more sophisticated analysis when we have a cleaner data set.
+
+In the meantime, it can still be meaningful to examine individual items and their distribution of results in this manor.
+
+Future analysis will be focused on sastisfaction with PhD experience compared to mental health outcomes and personality traits.
+
+
 ## References 
+
+

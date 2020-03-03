@@ -433,6 +433,50 @@ Due to this redundancy, the dimensions of the raw dataset when downloaded are 68
 
 ## Exploring the dataset
 
+First let's take a look at some basic demographic information about the survey participants
+
+![](milestone-01_files/figure-html/basic demographics1-1.png)<!-- -->
+And just to view this as a percentage of our data frame...
+
+
+```r
+ggplot(survey_data2, aes(Q5)) +  
+  geom_bar(aes(y = (..count..)/sum(..count..)), fill = "steelblue") +
+  coord_flip() +
+  xlab("Continent") +
+  ylab("Percent of Graduate Students") +
+  theme_minimal()
+```
+
+![](milestone-01_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
+
+It would appear that most of the participants in this survey are from Europe, the Americas, or Asia. This is not very surprising, but is good to verify the sample is relatively representative of the distribution of higher education institutes around the world.
+
+
+
+Next, I'm curious to see how many people are studying outside their country of birth...
+
+![](milestone-01_files/figure-html/basic demographics2-1.png)<!-- -->
+
+```
+## NULL
+```
+
+We have been particularly interested in what this survey can tell us about grad school satisfaction and mental health throughout grad school. Let's take a look at some of this data...
+
+![](milestone-01_files/figure-html/mental_health-1.png)<!-- -->![](milestone-01_files/figure-html/mental_health-2.png)<!-- -->![](milestone-01_files/figure-html/mental_health-3.png)<!-- -->![](milestone-01_files/figure-html/mental_health-4.png)<!-- -->![](milestone-01_files/figure-html/mental_health-5.png)<!-- -->![](milestone-01_files/figure-html/mental_health-6.png)<!-- -->
+
 ## Plan of Action
 
+It would appear that, from sampling a few survey items, that people aren't necessarily thinking negatively about their PhD experience. Some of these items show variability curves that are relatively bell shaped, while others are a little more variable.
+
+We would have liked to run more in depth initial analysis, such as looking at correlations between items in the survey. However, the data needs extensive cleaning and organizing first. For instance, many of the cell values are taken not as numeric but as characters, making it difficult to run correlations at this stage. We are aware the next milestone project is more oriented towards data wrangling, and we would like to expand with more sophisticated analysis when we have a cleaner data set.
+
+In the meantime, it can still be meaningful to examine individual items and their distribution of results in this manor.
+
+Future analysis will be focused on sastisfaction with PhD experience compared to mental health outcomes and personality traits.
+
+
 ## References 
+
+
