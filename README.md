@@ -38,13 +38,13 @@ Data used for this project is publicly available with a C4 Creative Commons lice
 
 3. Run the following scripts (in order) with the appropriate arguments specified
 
-  # Download data
+  1. Download data
   Rscript scripts/load.r
   
-  # Wrangle/clean/process data 
+  2. Wrangle/clean/process data 
   Rscript scripts/clean.r
   
-  # EDA script to export images
+  3. EDA script to export images
   Rscript scripts/EDA.r
   
-  # Knit your draft final report
+  Knit your draft final report
