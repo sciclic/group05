@@ -139,3 +139,6 @@ for (i in 1:length(survey_data$level_of_satisfaction_with_decision_to_pursue_a_P
 
 # Save object
 write.csv(survey_data, here::here("data", "survey_data.csv"))
+
+#Print complete message
+print("Data cleaning is complete!")

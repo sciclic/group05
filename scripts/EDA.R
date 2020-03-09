@@ -42,3 +42,5 @@ survey_data %>%
   theme_minimal() +
   ggsave('satisfaction_v_work_life_bal.png', path = here("images"), width = 8, height = 5)
 
+#Print complete message
+print("Exploratory Data Analysis complete!")
