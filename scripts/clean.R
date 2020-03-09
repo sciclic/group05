@@ -2,6 +2,7 @@ library(tidyverse)
 library(janitor)
 library(dplyr)
 library(here)
+library(stringr)
 
 ## Load the csv
 survey_raw <- read.csv(here::here("data", "survey_raw.csv"))
@@ -96,6 +97,45 @@ survey_data <-
            'supervisor_awareness_of_mental_health_services', 'university_offers_adequate_one_to_one_mental_health_support', 'university_offers_a_variety_of_support_resources',
            'experienced_bullying_in_PhD', 'who_was_the_perpetrator', 'able_to_speak_out_about_bullying_experiences',
            'experienced_discrimination_or_harrasment', 'which_have_you_experienced'))
+
+#Fix column "supervisor relationship" to contain only numbers.
+for (i in 1:length(survey_data$supervisor_relationship)){
+  survey_data$supervisor_relationship[i] <- str_replace(survey_data$supervisor_relationship[i], "7 = Extremely satisfied", "7")
+}
+for (i in 1:length(survey_data$supervisor_relationship)){
+  survey_data$supervisor_relationship[i] <- str_replace(survey_data$supervisor_relationship[i], "4 = Neither satisfied nor dissatisfied", "4")
+}
+for (i in 1:length(survey_data$supervisor_relationship)){
+  survey_data$supervisor_relationship[i] <- str_replace(survey_data$supervisor_relationship[i], "1 = Not at all satisfied", "1")
+}
+
+#Fix column "work life balance" to contain only numbers.
+for (i in 1:length(survey_data$work_life_balance)){
+  survey_data$work_life_balance[i] <- str_replace(survey_data$work_life_balance[i], "7 = Extremely satisfied", "7")
+}
+for (i in 1:length(survey_data$work_life_balance)){
+  survey_data$work_life_balance[i] <- str_replace(survey_data$work_life_balance[i], "4 = Neither satisfied nor dissatisfied", "4")
+}
+for (i in 1:length(survey_data$supervisor_relationship)){
+  survey_data$work_life_balance[i] <- str_replace(survey_data$work_life_balance[i], "1 = Not at all satisfied", "1")
+}
+
+#Fix column "level_of_satisfaction_with_decision_to_pursue_a_PhD" to only contain numbers
+for (i in 1:length(survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD)){
+  survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD[i] <- str_replace(survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD[i], "Very satisfied", "5")
+}
+for (i in 1:length(survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD)){
+  survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD[i] <- str_replace(survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD[i], "Somewhat satisfied", "4")
+}
+for (i in 1:length(survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD)){
+  survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD[i] <- str_replace(survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD[i], "Neither satisfied nor dissatisfied", "3")
+}
+for (i in 1:length(survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD)){
+  survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD[i] <- str_replace(survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD[i], "Somewhat dissatisfied", "2")
+}
+for (i in 1:length(survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD)){
+  survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD[i] <- str_replace(survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD[i], "Very dissatisfied", "1")
+}
 
 # Save object
 write.csv(survey_data, here::here("data", "survey_data.csv"))

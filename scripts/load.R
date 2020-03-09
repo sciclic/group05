@@ -1,6 +1,9 @@
 library(tidyverse)
 library(here)
 
+# Create data folder
+dir.create("data")
+
 # Download file
 download.file(url = "https://ndownloader.figshare.com/files/18543320?private_link=74a5ea79d76ad66a8af8",
               destfile = (here::here("data", "Nature_PhD_Survey.xlsx")),
