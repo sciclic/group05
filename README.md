@@ -40,7 +40,7 @@ Data used for this project is publicly available with a C4 Creative Commons lice
 3. Run the following scripts (in order) with the appropriate arguments specified
 
   - Download data:  
-    Rscript scripts/load.R <https://ndownloader.figshare.com/files/18543320?private_link=74a5ea79d76ad66a8af8>
+    Rscript scripts/load.R 'https://ndownloader.figshare.com/files/18543320?private_link=74a5ea79d76ad66a8af8'
   
   - Wrangle/clean/process data:   
     Rscript scripts/clean.r
