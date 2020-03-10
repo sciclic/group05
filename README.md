@@ -35,6 +35,7 @@ Data used for this project is publicly available with a C4 Creative Commons lice
   - purrr
   - here
   - janitor
+  - docopt
 
 3. Run the following scripts (in order) with the appropriate arguments specified
 
