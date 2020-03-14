@@ -137,6 +137,108 @@ for (i in 1:length(survey_data$level_of_satisfaction_with_decision_to_pursue_a_P
   survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD[i] <- str_replace(survey_data$level_of_satisfaction_with_decision_to_pursue_a_PhD[i], "Very dissatisfied", "1")
 }
 
+#Fix column "university_supports_work_life_balance" to only contain numbers
+for (i in 1:length(survey_data$university_supports_work_life_balance)){
+  survey_data$university_supports_work_life_balance[i] <- str_replace(survey_data$university_supports_work_life_balance[i], "Strongly agree", "5")
+}
+for (i in 1:length(survey_data$university_supports_work_life_balance)){
+  survey_data$university_supports_work_life_balance[i] <- str_replace(survey_data$university_supports_work_life_balance[i], "Somewhat agree", "4")
+}
+for (i in 1:length(survey_data$university_supports_work_life_balance)){
+  survey_data$university_supports_work_life_balance[i] <- str_replace(survey_data$university_supports_work_life_balance[i], "Neither agree nor disagree", "3")
+}
+for (i in 1:length(survey_data$university_supports_work_life_balance)){
+  survey_data$university_supports_work_life_balance[i] <- str_replace(survey_data$university_supports_work_life_balance[i], "Somewhat disagree", "2")
+}
+for (i in 1:length(survey_data$university_supports_work_life_balance)){
+  survey_data$university_supports_work_life_balance[i] <- str_replace(survey_data$university_supports_work_life_balance[i], "Strongly disagree", "1")
+}
+
+#Fix column "university_has_long_hours_culture" to only contain numbers
+for (i in 1:length(survey_data$university_has_long_hours_culture)){
+  survey_data$university_has_long_hours_culture[i] <- str_replace(survey_data$university_has_long_hours_culture[i], "Strongly agree", "5")
+}
+for (i in 1:length(survey_data$university_has_long_hours_culture)){
+  survey_data$university_has_long_hours_culture[i] <- str_replace(survey_data$university_has_long_hours_culture[i], "Somewhat agree", "4")
+}
+for (i in 1:length(survey_data$university_has_long_hours_culture)){
+  survey_data$university_has_long_hours_culture[i] <- str_replace(survey_data$university_has_long_hours_culture[i], "Neither agree nor disagree", "3")
+}
+for (i in 1:length(survey_data$university_has_long_hours_culture)){
+  survey_data$university_has_long_hours_culture[i] <- str_replace(survey_data$university_has_long_hours_culture[i], "Somewhat disagree", "2")
+}
+for (i in 1:length(survey_data$university_has_long_hours_culture)){
+  survey_data$university_has_long_hours_culture[i] <- str_replace(survey_data$university_has_long_hours_culture[i], "Strongly disagree", "1")
+}
+
+#Fix column "mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs" to only contain numbers
+for (i in 1:length(survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs)){
+  survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs[i] <- str_replace(survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs[i], "Strongly agree", "5")
+}
+for (i in 1:length(survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs)){
+  survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs[i] <- str_replace(survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs[i], "Somewhat agree", "4")
+}
+for (i in 1:length(survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs)){
+  survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs[i] <- str_replace(survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs[i], "Neither agree nor disagree", "3")
+}
+for (i in 1:length(survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs)){
+  survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs[i] <- str_replace(survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs[i], "Somewhat disagree", "2")
+}
+for (i in 1:length(survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs)){
+  survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs[i] <- str_replace(survey_data$mental_health_and_wellbeing_services_at_my_uni_are_appropriate_to_PhD_students_needs[i], "Strongly disagree", "1")
+}
+
+#Fix column "supervisor_awareness_of_mental_health_services" to only contain numbers
+for (i in 1:length(survey_data$supervisor_awareness_of_mental_health_services)){
+  survey_data$supervisor_awareness_of_mental_health_services[i] <- str_replace(survey_data$supervisor_awareness_of_mental_health_services[i], "Strongly agree", "5")
+}
+for (i in 1:length(survey_data$supervisor_awareness_of_mental_health_services)){
+  survey_data$supervisor_awareness_of_mental_health_services[i] <- str_replace(survey_data$supervisor_awareness_of_mental_health_services[i], "Somewhat agree", "4")
+}
+for (i in 1:length(survey_data$supervisor_awareness_of_mental_health_services)){
+  survey_data$supervisor_awareness_of_mental_health_services[i] <- str_replace(survey_data$supervisor_awareness_of_mental_health_services[i], "Neither agree nor disagree", "3")
+}
+for (i in 1:length(survey_data$supervisor_awareness_of_mental_health_services)){
+  survey_data$supervisor_awareness_of_mental_health_services[i] <- str_replace(survey_data$supervisor_awareness_of_mental_health_services[i], "Somewhat disagree", "2")
+}
+for (i in 1:length(survey_data$supervisor_awareness_of_mental_health_services)){
+  survey_data$supervisor_awareness_of_mental_health_services[i] <- str_replace(survey_data$supervisor_awareness_of_mental_health_services[i], "Strongly disagree", "1")
+}
+
+#Fix column "university_offers_adequate_one_to_one_mental_health_support" to only contain numbers
+for (i in 1:length(survey_data$university_offers_adequate_one_to_one_mental_health_support)){
+  survey_data$university_offers_adequate_one_to_one_mental_health_support[i] <- str_replace(survey_data$university_offers_adequate_one_to_one_mental_health_support[i], "Strongly agree", "5")
+}
+for (i in 1:length(survey_data$university_offers_adequate_one_to_one_mental_health_support)){
+  survey_data$university_offers_adequate_one_to_one_mental_health_support[i] <- str_replace(survey_data$university_offers_adequate_one_to_one_mental_health_support[i], "Somewhat agree", "4")
+}
+for (i in 1:length(survey_data$university_offers_adequate_one_to_one_mental_health_support)){
+  survey_data$university_offers_adequate_one_to_one_mental_health_support[i] <- str_replace(survey_data$university_offers_adequate_one_to_one_mental_health_support[i], "Neither agree nor disagree", "3")
+}
+for (i in 1:length(survey_data$university_offers_adequate_one_to_one_mental_health_support)){
+  survey_data$university_offers_adequate_one_to_one_mental_health_support[i] <- str_replace(survey_data$university_offers_adequate_one_to_one_mental_health_support[i], "Somewhat disagree", "2")
+}
+for (i in 1:length(survey_data$university_offers_adequate_one_to_one_mental_health_support)){
+  survey_data$university_offers_adequate_one_to_one_mental_health_support[i] <- str_replace(survey_data$university_offers_adequate_one_to_one_mental_health_support[i], "Strongly disagree", "1")
+}
+
+#Fix column "university_offers_a_variety_of_support_resources" to only contain numbers
+for (i in 1:length(survey_data$university_offers_a_variety_of_support_resources)){
+  survey_data$university_offers_a_variety_of_support_resources[i] <- str_replace(survey_data$university_offers_a_variety_of_support_resources[i], "Strongly agree", "5")
+}
+for (i in 1:length(survey_data$university_offers_a_variety_of_support_resources)){
+  survey_data$university_offers_a_variety_of_support_resources[i] <- str_replace(survey_data$university_offers_a_variety_of_support_resources[i], "Somewhat agree", "4")
+}
+for (i in 1:length(survey_data$university_offers_a_variety_of_support_resources)){
+  survey_data$university_offers_a_variety_of_support_resources[i] <- str_replace(survey_data$university_offers_a_variety_of_support_resources[i], "Neither agree nor disagree", "3")
+}
+for (i in 1:length(survey_data$university_offers_a_variety_of_support_resources)){
+  survey_data$university_offers_a_variety_of_support_resources[i] <- str_replace(survey_data$university_offers_a_variety_of_support_resources[i], "Somewhat disagree", "2")
+}
+for (i in 1:length(survey_data$university_offers_a_variety_of_support_resources)){
+  survey_data$university_offers_a_variety_of_support_resources[i] <- str_replace(survey_data$university_offers_a_variety_of_support_resources[i], "Strongly disagree", "1")
+}
+
 # Save object
 write.csv(survey_data, here::here("data", "survey_data.csv"))
 
