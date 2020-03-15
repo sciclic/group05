@@ -22,3 +22,30 @@ A brief directory for easy navigation of our project repo.
 
 Data used for this project is publicly available with a C4 Creative Commons license [here](https://figshare.com/s/74a5ea79d76ad66a8af8) and it is the result of a survey developed by Nature magazine. 
 
+# Usasge
+
+1. Clone this repo.
+
+2. Ensure the following packages are installed:
+
+  - ggplot2
+  - dplyr
+  - tidyverse
+  - stringr
+  - purrr
+  - here
+  - janitor
+  - docopt
+
+3. Run the following scripts (in order) with the appropriate arguments specified
+
+  - Download data:  
+    Rscript scripts/load.R 'https://ndownloader.figshare.com/files/18543320?private_link=74a5ea79d76ad66a8af8'
+  
+  - Wrangle/clean/process data:   
+    Rscript scripts/clean.r
+  
+  - EDA script to export images:  
+    Rscript scripts/EDA.r
+  
+  Knit your draft final report

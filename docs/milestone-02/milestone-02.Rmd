@@ -1,0 +1,122 @@
+---
+title: "Milestone 2: Write scripts"
+author: "Icíar Fernández Boyano"
+date: "27/02/2020"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    keep_md: yes
+  editor_options:
+    chunk_output_type: console 
+---
+
+# preliminary data cleanup (taken from milestone 1)
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(tidyverse)
+library(dplyr)
+library(plyr)
+library(corrplot)
+library(foreign)
+library(janitor)
+library(tidyr)
+library(here)
+```
+
+```{r read, include=FALSE}
+# see what the here path is 
+here() 
+# read in dataset
+survey_data <- readxl::read_xlsx(here::here("docs", "Nature_PhD_Survey.xlsx"))
+# see dimensions
+dim(survey_data) # 6813 by 274
+```
+
+```{r clean, include=FALSE}
+# fix names for easier analysis (. and : don't read well)
+survey_data <- janitor::clean_names(survey_data)
+
+# fix data
+## remove columns that are not relevant for analysis - irrelevant and open questions
+survey_data <- 
+  survey_data %>%
+  select(-c("id_format", # "smartphone", "tablet", "snap"
+            "id_completed", # "case completed in snap" / "completed" / "NA"
+            "id_site", # "NA", "newstory", "social1", "instagram", "pilot"...
+            "id_start", # time that the interview started at
+            "id_end_date", # date of the interview 
+            "id_end", # time that the interview ended at
+            "id_time", # time of the interview
+            "q2", # "hidden"
+            "q3_a", # other reasons to join a graduate program (out of given options), it's interesting but all are different so hard to use for analysis
+            "q12_1", # "NA", "to study at a specific university" 
+            "q12_a", # same as q3_a, but "other reasons to study outside your country of upbringing"
+            "q14_a", # same as above, "other reasons to have a job"
+            "q16", # "Is there anything else not mentioned that has concerned you since you started your PhD? 
+            "q17_a", # "if other, please specify - what do you enjoy more about life as a PhD student?"
+            "q26", # "overall, how would you describe the academic system, based on your PhD experience so far?" - open question
+            "q35_a", # if other, please specify - about feeling discriminated
+            "q39_a", # other reasons why you may be unlikely to pursue an academic career
+            "q40_a", # specify what other positions you may occupy after completing your degree
+            "q44_a", # other reasons why you may want to pursue a research career
+            "q45_a", # "how did you arrive at your current career decision?" open q
+            "q46_a", # "How do you learn about available career opportunities that are beyond academia?" open q
+            "q47_a", # "Which of the following 3 things would you say are the most difficult for PhD students in your discipline?" open q
+            "q48_a", # "Which of the following would you say are the most difficult for PhD students in the country where you are studying?" open q
+            "q49_a", # "Which of the following resources do you think PhD students need the most in order to establish a satisfying career?" open q
+            "q52_a", # "Which, if any, of the following activities have you done to advance your career?" open q
+            "q53_a", # other social media networks that may help you build your career
+            "q54_a", # other things that you would differently if starting over your program
+            "q55", # open q
+            "q58_a", # other ethnicity that best describes you
+            "q59_a", # other responsibilities you may have
+            "q60", # open q
+            "q62", "q63", "q64", # cols asking whether it's ok for nature & springer to contact in the future
+            "q65_a")) # numbers replacing names for anonymity
+
+ncol(survey_data) # 239 - dropped 35 rows at this point
+
+# changing first row to be header (header was non-informative, all questions were just numbered as "Q1", "Q2", "Q3"...)
+colnames(survey_data) <- survey_data[1,]
+survey_data <- survey_data[-1,]
+
+# drop columns with only NA values
+survey_data <- janitor::remove_empty(survey_data, which="cols")
+ncol(survey_data) # 233 - 6 columns were dropped
+
+# fix names again for easier analysis (many have spaces)
+survey_data <- janitor::clean_names(survey_data)
+```
+
+Some columns are repeated several times, with each column having a single unique value. For example, columns 15-24 are "What prompted you to study outside your country of upbringing?", but each column only has 1 reason as an answer. Therefore, it seems intuitive to combine these for posterior analysis.
+
+```{r unite, include=FALSE}
+# see colnames
+colnames(survey_data)
+# change blanks to NA
+survey_data <- survey_data %>%
+mutate_at(vars(colnames(.)),
+        .funs = funs(ifelse(.=="", NA, as.character(.))))
+# what_prompted_you_to_study_outside_your_country_of_upbringing - also, couldn't figure out how to use coalesce() with column indices rather than naming, need to make code better!
+survey_data <-
+  survey_data %>%
+  mutate(reasons_to_study_outside_your_country_of_upbringing = coalesce(what_prompted_you_to_study_outside_your_country_of_upbringing, what_prompted_you_to_study_outside_your_country_of_upbringing_2, what_prompted_you_to_study_outside_your_country_of_upbringing_3, what_prompted_you_to_study_outside_your_country_of_upbringing_4, what_prompted_you_to_study_outside_your_country_of_upbringing_5, what_prompted_you_to_study_outside_your_country_of_upbringing_6, what_prompted_you_to_study_outside_your_country_of_upbringing_7, what_prompted_you_to_study_outside_your_country_of_upbringing_8, what_prompted_you_to_study_outside_your_country_of_upbringing_9, what_prompted_you_to_study_outside_your_country_of_upbringing_10)) %>%
+  select_at(vars(-c(starts_with("what_prompted")))) # drop old columns
+
+survey_data <-
+  survey_data %>%
+  mutate(who_was_the_perpetrator = coalesce(who_was_the_perpetrator_s, who_was_the_perpetrator_s_2, who_was_the_perpetrator_s_3, who_was_the_perpetrator_s_4, who_was_the_perpetrator_s_5, who_was_the_perpetrator_s_6, who_was_the_perpetrator_s_7)) %>%
+  select_at(vars(-c(starts_with("who_was_the")))) # drop old columns
+
+
+survey_data <-
+  survey_data %>%
+  mutate(which_of_the_following_have_you_experienced = coalesce(which_of_the_following_have_you_experienced, which_of_the_following_have_you_experienced_2, which_of_the_following_have_you_experienced_3, which_of_the_following_have_you_experienced_4, which_of_the_following_have_you_experienced_5, which_of_the_following_have_you_experienced_6, which_of_the_following_have_you_experienced_7, which_of_the_following_have_you_experienced_8, which_of_the_following_have_you_experienced_9))
+survey_data <- survey_data[,-c(76:84)] # drop old columns
+
+# save intermediate object at this point
+write.csv(survey_data, here::here("docs", "survey_data.csv"))
+```
