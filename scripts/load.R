@@ -7,6 +7,7 @@ Usage: scripts/load.R <url_to_read>" -> doc
 library(tidyverse)
 library(here)
 library(docopt)
+library(RCurl)
 
 opt <- docopt(doc)
 
