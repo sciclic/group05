@@ -56,12 +56,13 @@ Due to this redundancy, the dimensions of the raw dataset when downloaded are 68
 ```{r survey-questions, echo=FALSE, warning=FALSE, message=FALSE}
 survey_questions <- readxl::read_xlsx(here::here("data", "survey_questions.xlsx"))
 dim(survey_questions) # 63 (questions) by 4 columns (question number, category, question, and type)
-knitr::kable(survey_questions) %>% kableExtra::kable_styling(bootstrap_options = "condensed", full_width=F, fixed_thead=TRUE) # print
+survey_questions <- as.data.frame(survey_questions)
+knitr::kable(survey_questions, "latex")
 ```
 
 After careful consideration, we have only used certain variables for our analysis. Below is a dataframe with these variables:
 
-```{r echo = FALSE, results='asis'}
+```{r echo = FALSE}
 Variables = c("Gender", "Studying in your home country", "Level of satisfaction with PhD", "Supervisor Relationship", "Work Life Balance", "University Long Hours Culture", "Anxiety or Depression caused by PhD", "Experienced Bullying in PhD", "Experienced Discrimination or Harrassment in PhD")
 Type = c("factor", "factor", "factor", "factor", "factor",
          "factor", "factor", "factor", "factor")
@@ -75,9 +76,8 @@ Description = c("Female (including trans female) / Male (including trans male) /
                 "Yes / No / Prefer not to say",
                 "Yes / No / Prefer not to say")
 variables_table = data.frame(Variables, Type, Description)
-kable(variables_table)
+knitr::kable(variables_table, "latex")
 ```
-
 
 ### Methods
 
@@ -91,7 +91,7 @@ Prior to logistic regression, we performed some exploratory data analysis in our
 
 #### General Demographics of Graduate Students in the Survey
 
-![](here::here("images", "basic_demographics1.png"))
+![Basic Demographics](`r here::here("images", "basic_demographics1.png")`)
 
 While the survey was available in several languages, which we assume was an attempt to improve outreach, it is clear that the respondents origin is highly biased to those located in Europe, closely followed by Asia and North America.  
 
@@ -103,70 +103,47 @@ We then perform logistic regression of the relationships that we attempt to inve
 
 Interestingly, there isn't a clear trend in the relationship between long hours culture & satisfaction. It is true that those dissatisfied with their decision (1 & 2 in the x axis) seem to have a higher probability of their university having a long hours culture, but aside from that, there is no clear pattern.
 
-```{r}
-knitr::include_graphics(here::here("images", "logisticregression.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
-    dpi = NULL)
-```
+![](`r here::here("images", "logisticregression.png")`)
 
 #### LR2: Supervisor Relationship ~ PhD Satisfaction
 
 It appears that probability of satisfaction does increase as the supervisor relationship goes from very dissatisfied (1) to very satisfied (7). However, the trend is not as pronounced as one may expect in this case either. Findings in the second graph match those that result from logistic regression, and indeed confirm that students that have a good relationship with their supervisor are more satisfied with their decision to pursue a PhD than those that don't. 
 
-```{r}
-knitr::include_graphics(here::here("images", "logisticregression2.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
-    dpi = NULL)
+![](`r here::here("images", "logisticregression2.png")`)
 
-knitr::include_graphics(here::here("images", "satisfaction_v_supervis_relationship.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
-    dpi = NULL)
-```
+![](`r here::here("images", "satisfaction_v_supervis_relationship.png")`)
 
 #### LR3: Work/Life Balance ~ PhD Satisfaction
 
 Out of all of our analysis, this one shows one of the most pronounced relationships - there is a strong trend between students that are more satisfied with their decision to pursue a PhD and a probability of having a good work/life balance, which stays true in our jitter graph.
 
-```{r}
-knitr::include_graphics(here::here("images", "logisticregression5.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
-    dpi = NULL)
+![](`r here::here("images", "logisticregression5.png")`)
 
-knitr::include_graphics(here::here("images", "satisfaction_v_work_life_bal.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
-    dpi = NULL)
-```
+![](`r here::here("images", "satisfaction_v_work_life_bal.png")`)
 
 #### LR4: Supervisor Relationship ~ Anxiety or Depression
 
 We had a great interest in mental health markers in graduate school, with anxiety or depression being the clearest to measure out of the survey variables. There is a positive relationship between having a good relationship with your supervisor and a low probability of seeking help for anxiety or depression, which matches our hypothesis.
 
-```{r}
-knitr::include_graphics(here::here("images", "logisticregression3.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
-    dpi = NULL)
-```
+![](`r here::here("images", "logisticregression3.png")`)
 
 #### LR5: Studying Outside of your Home Country ~ Anxiety or Depression
 
 Studying in your home country and seeking help for anxiety or depression do not appear to be correlated when running a logistic regression. 
 
-```{r}
-knitr::include_graphics(here::here("images", "logisticregression4.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
-    dpi = NULL)
-```
+![](`r here::here("images", "logisticregression4.png")`)
 
 #### LR6: Studying Outside of your Home Country ~ Discrimination or Harrassment
 
 Although seemingly weak, there does appear to be a correlation between study location and having experienced discrimination or harrassment.
 
-```{r}
-knitr::include_graphics(here::here("images", "logisticregression6.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
-    dpi = NULL)
-```
+![](`r here::here("images", "logisticregression6.png")`)
 
 #### LR7: Gender ~ Discrimination or Harrassment
 
 There are different correlations between each gender and discrimination or harrassment.
 
-```{r}
-knitr::include_graphics(here::here("images", "logisticregression7.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
-    dpi = NULL)
-```
+![](`r here::here("images", "logisticregression7.png")`)
 
 ## Discussion and Conclusion
 
