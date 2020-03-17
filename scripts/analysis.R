@@ -18,7 +18,6 @@ library(ggplot2)
 library(corrplot)
 library(dotwhisker)
 library(here)
-library(tidyverse)
 library(broom)
 
 opt <- docopt(doc)

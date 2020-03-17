@@ -39,6 +39,13 @@ library(corrplot)
 library(docopt)
 library(janitor)
 library(glue)
+library(broom)
+library(dotwhisker)
+library(tinytex)
+library(kableExtra)
+library(modelr)
+library(tidyquant)
+library(DT)
 ```
 ## Manual Usage
 
