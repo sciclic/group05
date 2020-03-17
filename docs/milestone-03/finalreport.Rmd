@@ -101,12 +101,16 @@ We then perform logistic regression of the relationships that we attempt to inve
 
 #### LR1: Long Hours Culture ~ PhD Satisfaction
 
+Interestingly, there isn't a clear trend in the relationship between long hours culture & satisfaction. It is true that those dissatisfied with their decision (1 & 2 in the x axis) seem to have a higher probability of their university having a long hours culture, but aside from that, there is no clear pattern.
+
 ```{r}
 knitr::include_graphics(here::here("images", "logisticregression.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
     dpi = NULL)
 ```
 
 #### LR2: Supervisor Relationship ~ PhD Satisfaction
+
+It appears that probability of satisfaction does increase as the supervisor relationship goes from very dissatisfied (1) to very satisfied (7). However, the trend is not as pronounced as one may expect in this case either. Findings in the second graph match those that result from logistic regression, and indeed confirm that students that have a good relationship with their supervisor are more satisfied with their decision to pursue a PhD than those that don't. 
 
 ```{r}
 knitr::include_graphics(here::here("images", "logisticregression2.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
@@ -118,6 +122,8 @@ knitr::include_graphics(here::here("images", "satisfaction_v_supervis_relationsh
 
 #### LR3: Work/Life Balance ~ PhD Satisfaction
 
+Out of all of our analysis, this one shows one of the most pronounced relationships - there is a strong trend between students that are more satisfied with their decision to pursue a PhD and a probability of having a good work/life balance, which stays true in our jitter graph.
+
 ```{r}
 knitr::include_graphics(here::here("images", "logisticregression5.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
     dpi = NULL)
@@ -128,12 +134,16 @@ knitr::include_graphics(here::here("images", "satisfaction_v_work_life_bal.png")
 
 #### LR4: Supervisor Relationship ~ Anxiety or Depression
 
+We had a great interest in mental health markers in graduate school, with anxiety or depression being the clearest to measure out of the survey variables. There is a positive relationship between having a good relationship with your supervisor and a low probability of seeking help for anxiety or depression, which matches our hypothesis.
+
 ```{r}
 knitr::include_graphics(here::here("images", "logisticregression3.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
     dpi = NULL)
 ```
 
 #### LR5: Studying Outside of your Home Country ~ Anxiety or Depression
+
+Studying in your home country and seeking help for anxiety or depression do not appear to be correlated when running a logistic regression. 
 
 ```{r}
 knitr::include_graphics(here::here("images", "logisticregression4.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
@@ -142,12 +152,16 @@ knitr::include_graphics(here::here("images", "logisticregression4.png"), auto_pd
 
 #### LR6: Studying Outside of your Home Country ~ Discrimination or Harrassment
 
+Although seemingly weak, there does appear to be a correlation between study location and having experienced discrimination or harrassment.
+
 ```{r}
 knitr::include_graphics(here::here("images", "logisticregression6.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
     dpi = NULL)
 ```
 
 #### LR7: Gender ~ Discrimination or Harrassment
+
+There are different correlations between each gender and discrimination or harrassment.
 
 ```{r}
 knitr::include_graphics(here::here("images", "logisticregression7.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
@@ -156,11 +170,11 @@ knitr::include_graphics(here::here("images", "logisticregression7.png"), auto_pd
 
 ## Discussion and Conclusion
 
-*Complete later.*
+While we have certainly found some relationships between our variables of interest, these have proven weaker than originally expected. This makes sense given the complexity of the variables - the level of satisfaction that a student may feel with their decision to pursue a PhD is probably due to the added effect of many variables rather than to a single factor, meaning that a relationship between two variables alone is an incomplete picture of everything that may be taken into account. Nonetheless, it was still interesting to investigate these relationships and work with this dataset. Unfortunately, it did prove quite challenging to use a dataset with many categorical variables that required a lot of fixing, converting answers to scales, and ultimately running logistic regression rather than linear, as the latter is unbounded and cannot be used for categorical variables.
 
 ## References
 
-*Complete later.*
+Nature.com. 2020. Phds: The Tortuous Truth. [online] Available at: [https://www.nature.com/articles/d41586-019-03459-7](https://www.nature.com/articles/d41586-019-03459-7) [Accessed 17 March 2020].
 
 
 

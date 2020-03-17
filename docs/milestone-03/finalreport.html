@@ -201,6 +201,7 @@ summary {
 <pre><code>## Warning: package &#39;modelr&#39; was built under R version 3.6.3</code></pre>
 <pre><code>## Warning: package &#39;knitr&#39; was built under R version 3.6.2</code></pre>
 <pre><code>## Warning: package &#39;kableExtra&#39; was built under R version 3.6.2</code></pre>
+<pre><code>## Warning: package &#39;tinytex&#39; was built under R version 3.6.3</code></pre>
 <div id="the-mental-health-toll-of-graduate-school" class="section level1">
 <h1>The Mental Health Toll of Graduate School</h1>
 <div id="introduction" class="section level2">
@@ -1263,12 +1264,14 @@ Yes / No / Prefer not to say
 <p>We then perform logistic regression of the relationships that we attempt to investigate, described in the <strong>research question</strong> section.</p>
 <div id="lr1-long-hours-culture-phd-satisfaction" class="section level4">
 <h4>LR1: Long Hours Culture ~ PhD Satisfaction</h4>
+<p>Interestingly, there isn’t a clear trend in the relationship between long hours culture &amp; satisfaction. It is true that those dissatisfied with their decision (1 &amp; 2 in the x axis) seem to have a higher probability of their university having a long hours culture, but aside from that, there is no clear pattern.</p>
 <pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;logisticregression.png&quot;), auto_pdf = getOption(&quot;knitr.graphics.auto_pdf&quot;, FALSE), 
     dpi = NULL)</code></pre>
 <p><img src="C:/Users/iciar/OneDrive/Desktop/School/STAT547/group05/images/logisticregression.png" width="1050" /></p>
 </div>
 <div id="lr2-supervisor-relationship-phd-satisfaction" class="section level4">
 <h4>LR2: Supervisor Relationship ~ PhD Satisfaction</h4>
+<p>It appears that probability of satisfaction does increase as the supervisor relationship goes from very dissatisfied (1) to very satisfied (7). However, the trend is not as pronounced as one may expect in this case either. Findings in the second graph match those that result from logistic regression, and indeed confirm that students that have a good relationship with their supervisor are more satisfied with their decision to pursue a PhD than those that don’t.</p>
 <pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;logisticregression2.png&quot;), auto_pdf = getOption(&quot;knitr.graphics.auto_pdf&quot;, FALSE), 
     dpi = NULL)</code></pre>
 <p><img src="C:/Users/iciar/OneDrive/Desktop/School/STAT547/group05/images/logisticregression2.png" width="1050" /></p>
@@ -1278,6 +1281,7 @@ Yes / No / Prefer not to say
 </div>
 <div id="lr3-worklife-balance-phd-satisfaction" class="section level4">
 <h4>LR3: Work/Life Balance ~ PhD Satisfaction</h4>
+<p>Out of all of our analysis, this one shows one of the most pronounced relationships - there is a strong trend between students that are more satisfied with their decision to pursue a PhD and a probability of having a good work/life balance, which stays true in our jitter graph.</p>
 <pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;logisticregression5.png&quot;), auto_pdf = getOption(&quot;knitr.graphics.auto_pdf&quot;, FALSE), 
     dpi = NULL)</code></pre>
 <p><img src="C:/Users/iciar/OneDrive/Desktop/School/STAT547/group05/images/logisticregression5.png" width="1050" /></p>
@@ -1287,24 +1291,28 @@ Yes / No / Prefer not to say
 </div>
 <div id="lr4-supervisor-relationship-anxiety-or-depression" class="section level4">
 <h4>LR4: Supervisor Relationship ~ Anxiety or Depression</h4>
+<p>We had a great interest in mental health markers in graduate school, with anxiety or depression being the clearest to measure out of the survey variables. There is a positive relationship between having a good relationship with your supervisor and a low probability of seeking help for anxiety or depression, which matches our hypothesis.</p>
 <pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;logisticregression3.png&quot;), auto_pdf = getOption(&quot;knitr.graphics.auto_pdf&quot;, FALSE), 
     dpi = NULL)</code></pre>
 <p><img src="C:/Users/iciar/OneDrive/Desktop/School/STAT547/group05/images/logisticregression3.png" width="1050" /></p>
 </div>
 <div id="lr5-studying-outside-of-your-home-country-anxiety-or-depression" class="section level4">
 <h4>LR5: Studying Outside of your Home Country ~ Anxiety or Depression</h4>
+<p>Studying in your home country and seeking help for anxiety or depression do not appear to be correlated when running a logistic regression.</p>
 <pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;logisticregression4.png&quot;), auto_pdf = getOption(&quot;knitr.graphics.auto_pdf&quot;, FALSE), 
     dpi = NULL)</code></pre>
 <p><img src="C:/Users/iciar/OneDrive/Desktop/School/STAT547/group05/images/logisticregression4.png" width="1050" /></p>
 </div>
 <div id="lr6-studying-outside-of-your-home-country-discrimination-or-harrassment" class="section level4">
 <h4>LR6: Studying Outside of your Home Country ~ Discrimination or Harrassment</h4>
+<p>Although seemingly weak, there does appear to be a correlation between study location and having experienced discrimination or harrassment.</p>
 <pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;logisticregression6.png&quot;), auto_pdf = getOption(&quot;knitr.graphics.auto_pdf&quot;, FALSE), 
     dpi = NULL)</code></pre>
 <p><img src="C:/Users/iciar/OneDrive/Desktop/School/STAT547/group05/images/logisticregression6.png" width="1050" /></p>
 </div>
 <div id="lr7-gender-discrimination-or-harrassment" class="section level4">
 <h4>LR7: Gender ~ Discrimination or Harrassment</h4>
+<p>There are different correlations between each gender and discrimination or harrassment.</p>
 <pre class="r"><code>knitr::include_graphics(here::here(&quot;images&quot;, &quot;logisticregression7.png&quot;), auto_pdf = getOption(&quot;knitr.graphics.auto_pdf&quot;, FALSE), 
     dpi = NULL)</code></pre>
 <p><img src="C:/Users/iciar/OneDrive/Desktop/School/STAT547/group05/images/logisticregression7.png" width="1050" /></p>
@@ -1313,11 +1321,11 @@ Yes / No / Prefer not to say
 </div>
 <div id="discussion-and-conclusion" class="section level2">
 <h2>Discussion and Conclusion</h2>
-<p><em>Complete later.</em></p>
+<p>While we have certainly found some relationships between our variables of interest, these have proven weaker than originally expected. This makes sense given the complexity of the variables - the level of satisfaction that a student may feel with their decision to pursue a PhD is probably due to the added effect of many variables rather than to a single factor, meaning that a relationship between two variables alone is an incomplete picture of everything that may be taken into account. Nonetheless, it was still interesting to investigate these relationships and work with this dataset. Unfortunately, it did prove quite challenging to use a dataset with many categorical variables that required a lot of fixing, converting answers to scales, and ultimately running logistic regression rather than linear, as the latter is unbounded and cannot be used for categorical variables.</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
-<p><em>Complete later.</em></p>
+<p>Nature.com. 2020. Phds: The Tortuous Truth. [online] Available at: <a href="https://www.nature.com/articles/d41586-019-03459-7">https://www.nature.com/articles/d41586-019-03459-7</a> [Accessed 17 March 2020].</p>
 </div>
 </div>
 
