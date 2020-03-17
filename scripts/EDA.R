@@ -1,12 +1,25 @@
+"This script loads in a cleaned data file and runs an exploraroty data analysis.
+
+Usage: clean.R --filepath=<filepath>
+" -> doc
+
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
 library(stringr)
 library(purrr)
 library(here)
+library(corrplot)
+library(docopt)
+
+opt <- docopt(doc)
+
+main <- function(filepath){
+  
+## Load the csv
+survey_data <- read_csv(filepath)
 
 #Load in survey_data csv file
-survey_data <- read.csv(here::here("data", "survey_data.csv"))
 
 #Create images folder
 dir.create("images")
@@ -42,5 +55,16 @@ survey_data %>%
   theme_minimal() +
   ggsave('satisfaction_v_work_life_bal.png', path = here("images"), width = 8, height = 5)
 
+correlations <- cor(survey_data[sapply(survey_data, is.numeric)])
+corrplot(correlations, 
+         type="upper", 
+         method="color", 
+         tl.srt=45,
+         addCoef.col = "black",
+         diag = FALSE)
+
 #Print complete message
 print("Exploratory Data Analysis complete!")
+}
+
+main(opt$filepath)
