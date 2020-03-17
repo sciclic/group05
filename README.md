@@ -28,14 +28,18 @@ Data used for this project is publicly available with a C4 Creative Commons lice
 
 2. Ensure the following packages are installed:
 
-  - ggplot2
-  - dplyr
-  - tidyverse
-  - stringr
-  - purrr
-  - here
-  - janitor
-  - docopt
+```
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(purrr)
+library(here)
+library(corrplot)
+library(docopt)
+library(janitor)
+library(glue)
+```
 
 3. Run the following scripts (in order) with the appropriate arguments specified
 
