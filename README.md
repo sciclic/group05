@@ -64,9 +64,11 @@ library(glue)
     Rscript scripts/analysis.R --data_path="data/" --data_file="survey_data.csv"
     ```
   
-  - Knit final report:
-    *complete when report is uploaded*
-
+  - Knit final report: [(knit.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/knit.R)
+    ```
+    Rscript scripts/knit.R --finalreport="docs/milestone-03/finalreport.Rmd"
+    ```
+    
 ## GNU MAKE Usage
 
 In order to delete all outputted images and docs created by this analysis, enter this from the terminal:
