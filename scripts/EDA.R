@@ -4,6 +4,7 @@ library(ggplot2)
 library(stringr)
 library(purrr)
 library(here)
+library(corrplot)
 
 #Load in survey_data csv file
 survey_data <- read.csv(here::here("data", "survey_data.csv"))
@@ -41,6 +42,14 @@ survey_data %>%
   ylab("Quality of work-life balance (1 - 7 scale)") +
   theme_minimal() +
   ggsave('satisfaction_v_work_life_bal.png', path = here("images"), width = 8, height = 5)
+
+correlations <- cor(survey_data[sapply(survey_data, is.numeric)])
+corrplot(correlations, 
+         type="upper", 
+         method="color", 
+         tl.srt=45,
+         addCoef.col = "black",
+         diag = FALSE)
 
 #Print complete message
 print("Exploratory Data Analysis complete!")
