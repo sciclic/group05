@@ -55,14 +55,6 @@ survey_data %>%
   theme_minimal() +
   ggsave('satisfaction_v_work_life_bal.png', path = here("images"), width = 8, height = 5)
 
-correlations <- cor(survey_data[sapply(survey_data, is.numeric)])
-corrplot(correlations, 
-         type="upper", 
-         method="color", 
-         tl.srt=45,
-         addCoef.col = "black",
-         diag = FALSE)
-
 #Print complete message
 print("Exploratory Data Analysis complete!")
 }

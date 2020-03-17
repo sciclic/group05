@@ -28,14 +28,19 @@ Data used for this project is publicly available with a C4 Creative Commons lice
 
 2. Ensure the following packages are installed:
 
-  - ggplot2
-  - dplyr
-  - tidyverse
-  - stringr
-  - purrr
-  - here
-  - janitor
-  - docopt
+```
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(purrr)
+library(here)
+library(corrplot)
+library(docopt)
+library(janitor)
+library(glue)
+```
+## Manual Usage
 
 3. Run the following scripts (in order) with the appropriate arguments specified
 
@@ -46,12 +51,12 @@ Data used for this project is publicly available with a C4 Creative Commons lice
   
   - Wrangle/clean/process data: [(clean.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/clean.R)
     ```
-    Rscript scripts/clean.r
+    Rscript scripts/clean.r --filepath="data/survey_raw.csv"
     ```
   
   - EDA script to export images: [(EDA.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/EDA.R)
     ```
-    Rscript scripts/EDA.r
+    Rscript scripts/EDA.r --filepath="data/survey_data.csv"
     ```
     
   - Analysis script with logistic regression models: [(analysis.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/analysis.R)
@@ -61,3 +66,15 @@ Data used for this project is publicly available with a C4 Creative Commons lice
   
   - Knit final report:
     *complete when report is uploaded*
+
+## GNU MAKE Usage
+
+In order to delete all outputted images and docs created by this analysis, enter this from the terminal:
+```
+make clean
+```
+In order to run entire analysis from start to finish, enter this from the terminal:
+```
+make all
+```
+Making all will call a series of scripts in sequence in order to produce the entire analysis
