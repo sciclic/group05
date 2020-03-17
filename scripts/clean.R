@@ -1,11 +1,21 @@
+"This script loads in a data file and cleans the data file. Columns are removed, condensed, and/or converted from strings to numbers.
+
+Usage: clean.R --filepath=<filepath>
+" -> doc
+
 library(tidyverse)
 library(janitor)
 library(dplyr)
 library(here)
 library(stringr)
+library(docopt)
+
+opt <- docopt(doc)
+
+main <- function(filepath){
 
 ## Load the csv
-survey_raw <- read.csv(here::here("data", "survey_raw.csv"))
+survey_raw <- read_csv(filepath)
 
 # Fix names for easier analysis (. and : don't read well) - and save this into a "clean" object
 survey_data <- janitor::clean_names(survey_raw)
@@ -244,3 +254,6 @@ write.csv(survey_data, here::here("data", "survey_data.csv"))
 
 #Print complete message
 print("Data cleaning is complete!")
+}
+
+main(opt$filepath)
