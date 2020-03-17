@@ -99,20 +99,6 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{wrapfig}
-\usepackage{float}
-\usepackage{colortbl}
-\usepackage{pdflscape}
-\usepackage{tabu}
-\usepackage{threeparttable}
-\usepackage{threeparttablex}
-\usepackage[normalem]{ulem}
-\usepackage{makecell}
-\usepackage{xcolor}
 
 \title{Final Report}
 \author{Iciar Fernandez Boyano, Jacob Gerlofs}
@@ -120,70 +106,6 @@
 
 \begin{document}
 \maketitle
-
-\begin{verbatim}
-## Warning: package 'here' was built under R version 3.6.2
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'tidyverse' was built under R version 3.6.2
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'tidyr' was built under R version 3.6.2
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'dplyr' was built under R version 3.6.2
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'tidyquant' was built under R version 3.6.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'PerformanceAnalytics' was built under R version 3.6.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'xts' was built under R version 3.6.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'zoo' was built under R version 3.6.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'quantmod' was built under R version 3.6.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'TTR' was built under R version 3.6.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'DT' was built under R version 3.6.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'broom' was built under R version 3.6.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'modelr' was built under R version 3.6.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'knitr' was built under R version 3.6.2
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'kableExtra' was built under R version 3.6.2
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'tinytex' was built under R version 3.6.3
-\end{verbatim}
 
 \hypertarget{the-mental-health-toll-of-graduate-school}{%
 \section{The Mental Health Toll of Graduate
@@ -278,167 +200,621 @@ and the category it belongs to within the survey.
 ## [1] 63  4
 \end{verbatim}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{l|l|l|l}
-\hline
-Question\_No & Section & Question & Type\\
-\hline
-1 & Questionnaire & Which, if any, of the following degrees are you currently studying for? & Single choice\\
-\hline
-2 & Questionnaire & Which was the most important reason you decided to enrol in a PhD programme? & Single choice\\
-\hline
-3 & Questionnaire & Are you studying in the country you grew up in? & Single choice\\
-\hline
-4 & Questionnaire & Where do you currently live? & Single choice\\
-\hline
-5 & Questionnaire & Which country in Asia? & Single choice\\
-\hline
-6 & Questionnaire & Which country in Australasia? & Single choice\\
-\hline
-7 & Questionnaire & Which country in Africa? & Single choice\\
-\hline
-8 & Questionnaire & Which country in Europe? & Single choice\\
-\hline
-9 & Questionnaire & Which country in North or Central America? & Single choice\\
-\hline
-10 & Questionnaire & Which country in South America? & Single choice\\
-\hline
-11 & Questionnaire & What prompted you to study outside your country of upbringing? & Multiple choice\\
-\hline
-12 & Questionnaire & Do you have a job alongside your studies? & Single choice\\
-\hline
-13 & Questionnaire & What is your main reason for having a job? & Single choice\\
-\hline
-14 & PhD Highs and Lows & What concerns you the most since you started your PhD? & Multiple choice\\
-\hline
-14a & PhD Highs and Lows & Is there anything else not mentioned that has concerned you since you started your PhD? & Open\\
-\hline
-15 & PhD Highs and Lows & Overall, what do you enjoy most about life as a PhD student? & Single choice\\
-\hline
-16 & PhD Highs and Lows & How satisfied are you with your decision to pursue a PhD? & Scale\\
-\hline
-17 & Satisfaction with your PhD experience & How satisfied are you with your PhD experience? & Scale\\
-\hline
-18 & Satisfaction with your PhD experience & Since the very start of your graduate school experience, would you say your level of satisfaction has: & Single choice\\
-\hline
-19 & Satisfaction with your PhD experience & How satisfied are you with each of the following attributes or aspects of your PhD? & Scale\\
-\hline
-20 & Satisfaction with your PhD experience & To what extent does your PhD programme compare to your original expectations? & Single choice\\
-\hline
-21 & Your programme & On average, how many hours a week do you typically spend on your PhD programme? & Single choice\\
-\hline
-22 & Your programme & On average, how much one-on-one contact time do you spend with your supervisor each week? & Single choice\\
-\hline
-23 & Your programme & Overall, how would you describe the academic system, based on your PhD experience so far? & Open\\
-\hline
-24 & Your programme & To what extent do you agree or disagree with the following statements regarding other faculty members or scientists in your department? & Scale\\
-\hline
-25 & Your programme & Have you ever sought help for anxiety or depression caused by PhD study? & Single choice\\
-\hline
-26 & Your programme & Did you seek help for anxiety or depression within your institution? & Single choice\\
-\hline
-27 & Your programme & To what extent do you agree or disagree with the following statements? & Scale\\
-\hline
-28 & Mental health and discrimination & Do you feel that you have experienced bullying in your PhD program? & Single choice\\
-\hline
-29 & Mental health and discrimination & Who was the perpetrator(s)? & Multiple choice\\
-\hline
-29a & Mental health and discrimination & Do you feel able to speak out about your experiences of bullying without personal repercussions? & Single choice\\
-\hline
-30 & Mental health and discrimination & Do you feel that you have experienceddiscrimination or harassment in your PhD program? & Single choice\\
-\hline
-31 & Mental health and discrimination & Which of the following have you experienced? & Multiple choice\\
-\hline
-32 & Future career plans & How much do you expect your PhD to improve your job prospects? & Scale\\
-\hline
-33 & Future career plans & Which of the following sectors would you most like to work in (beyond a postdoc) when you complete your degree? & Multiple choice and ranking\\
-\hline
-34 & Future career plans & Please use the scale below to indicate how likely you are to pursue one of these career paths upon completion of your programme. & Scale\\
-\hline
-35 & Future career plans & If you’re unlikely to pursue an academic research career, what are the main reasons? & Multiple choice\\
-\hline
-36 & Future career plans & What position do you most expect to occupy immediately after you complete your degree? & Single choice\\
-\hline
-37 & Future career plans & What type of career you are interested in pursuing after your graduate degree? & Open\\
-\hline
-38 & Career expectations & After completing your PhD, how long do you think it will take you to find a permanent (non-trainee) position? & Single choice\\
-\hline
-39 & Career expectations & How much more likely are you now to pursue a research career than when you launched your PhD programme? & Single choice\\
-\hline
-40 & Career expectations & What is the main reason why you are more likely to pursue a research career? & Single choice\\
-\hline
-41 & Career expectations & How did you arrive at your current career decision? & Multiple choice\\
-\hline
-42 & Career support & How do you learn about available career opportunities that are beyond academia? & Multiple choice\\
-\hline
-43 & Career support & Which of the following 3 things would you say are the most difficult for PhD students in your discipline? & Multiple choice\\
-\hline
-44 & Career support & Which of the following would you say are the most difficult for PhD students in the country where you are studying? & Multiple choice\\
-\hline
-45 & Career support & Which of the following resources do you think PhD students need the most in order to establish a satisfying career? & Multiple choice\\
-\hline
-46 & Career support & How well is your programme preparing you to carry out each of the following activities? & Scale\\
-\hline
-47 & Career support & To what extent do you agree or disagree with the following statements? & Scale\\
-\hline
-48 & Career support & Which, if any, of the following activities have you done to advance your career? & Multiple choice\\
-\hline
-49 & Career support & Which of the following social media networks have you used to build your professional network? & Multiple choice\\
-\hline
-50 & Reflection & What would you do differently right now if you were starting your programme? & Multiple choice\\
-\hline
-51 & Reflection & With the benefit of hindsight, what one thing do you know now which you wish you’d known about when you started your PhD? & Open\\
-\hline
-52 & Reflection & What is your age? & Single choice\\
-\hline
-53 & Reflection & Are you… (Gender) & Single choice\\
-\hline
-54 & Reflection & Which of the following best describes you? (Ethnicity) & Multiple choice\\
-\hline
-55 & Reflection & Do you have any caring responsibilities? & Multiple choice\\
-\hline
-56 & Reflection & Thank you for taking part in the survey. Are there any more comments you’d like to share with us? & Open\\
-\hline
-57 & Thank you & Would you like to be entered into a prize draw for a chance to win GBP £250? You can find prize draw terms and conditions here. Shift Learning will be administering the incentive and a winner will be contacted within 4 weeks of the survey closing date. & Single choice\\
-\hline
-58 & Thank you & Nature may want to contact you again to ask for more information on the subjects discussed in this survey, or to ask you specific questions about your comments and answers. Are you happy to receive follow up requests? & Single choice\\
-\hline
-59 & Thank you & Springer Nature is keen to update PhD students with advice and information about their programme and career options via a regular newsletter. Would you like to be kept informed about this planned service from Nature Careers? & Single choice\\
-\hline
-60 & Thank you & Shift Learning carry out paid research in the education sector throughout the year. Would you be happy to be contacted about relevant future research opportunities? & Single choice\\
-\hline
-61 & Thank you & Please fill in your contact details below. & Open\\
-\hline
-\end{tabular}
-\end{table}
+Question\_No
+
+Section
+
+Question
+
+Type
+
+1
+
+Questionnaire
+
+Which, if any, of the following degrees are you currently studying for?
+
+Single choice
+
+2
+
+Questionnaire
+
+Which was the most important reason you decided to enrol in a PhD
+programme?
+
+Single choice
+
+3
+
+Questionnaire
+
+Are you studying in the country you grew up in?
+
+Single choice
+
+4
+
+Questionnaire
+
+Where do you currently live?
+
+Single choice
+
+5
+
+Questionnaire
+
+Which country in Asia?
+
+Single choice
+
+6
+
+Questionnaire
+
+Which country in Australasia?
+
+Single choice
+
+7
+
+Questionnaire
+
+Which country in Africa?
+
+Single choice
+
+8
+
+Questionnaire
+
+Which country in Europe?
+
+Single choice
+
+9
+
+Questionnaire
+
+Which country in North or Central America?
+
+Single choice
+
+10
+
+Questionnaire
+
+Which country in South America?
+
+Single choice
+
+11
+
+Questionnaire
+
+What prompted you to study outside your country of upbringing?
+
+Multiple choice
+
+12
+
+Questionnaire
+
+Do you have a job alongside your studies?
+
+Single choice
+
+13
+
+Questionnaire
+
+What is your main reason for having a job?
+
+Single choice
+
+14
+
+PhD Highs and Lows
+
+What concerns you the most since you started your PhD?
+
+Multiple choice
+
+14a
+
+PhD Highs and Lows
+
+Is there anything else not mentioned that has concerned you since you
+started your PhD?
+
+Open
+
+15
+
+PhD Highs and Lows
+
+Overall, what do you enjoy most about life as a PhD student?
+
+Single choice
+
+16
+
+PhD Highs and Lows
+
+How satisfied are you with your decision to pursue a PhD?
+
+Scale
+
+17
+
+Satisfaction with your PhD experience
+
+How satisfied are you with your PhD experience?
+
+Scale
+
+18
+
+Satisfaction with your PhD experience
+
+Since the very start of your graduate school experience, would you say
+your level of satisfaction has:
+
+Single choice
+
+19
+
+Satisfaction with your PhD experience
+
+How satisfied are you with each of the following attributes or aspects
+of your PhD?
+
+Scale
+
+20
+
+Satisfaction with your PhD experience
+
+To what extent does your PhD programme compare to your original
+expectations?
+
+Single choice
+
+21
+
+Your programme
+
+On average, how many hours a week do you typically spend on your PhD
+programme?
+
+Single choice
+
+22
+
+Your programme
+
+On average, how much one-on-one contact time do you spend with your
+supervisor each week?
+
+Single choice
+
+23
+
+Your programme
+
+Overall, how would you describe the academic system, based on your PhD
+experience so far?
+
+Open
+
+24
+
+Your programme
+
+To what extent do you agree or disagree with the following statements
+regarding other faculty members or scientists in your department?
+
+Scale
+
+25
+
+Your programme
+
+Have you ever sought help for anxiety or depression caused by PhD study?
+
+Single choice
+
+26
+
+Your programme
+
+Did you seek help for anxiety or depression within your institution?
+
+Single choice
+
+27
+
+Your programme
+
+To what extent do you agree or disagree with the following statements?
+
+Scale
+
+28
+
+Mental health and discrimination
+
+Do you feel that you have experienced bullying in your PhD program?
+
+Single choice
+
+29
+
+Mental health and discrimination
+
+Who was the perpetrator(s)?
+
+Multiple choice
+
+29a
+
+Mental health and discrimination
+
+Do you feel able to speak out about your experiences of bullying without
+personal repercussions?
+
+Single choice
+
+30
+
+Mental health and discrimination
+
+Do you feel that you have experienceddiscrimination or harassment in
+your PhD program?
+
+Single choice
+
+31
+
+Mental health and discrimination
+
+Which of the following have you experienced?
+
+Multiple choice
+
+32
+
+Future career plans
+
+How much do you expect your PhD to improve your job prospects?
+
+Scale
+
+33
+
+Future career plans
+
+Which of the following sectors would you most like to work in (beyond a
+postdoc) when you complete your degree?
+
+Multiple choice and ranking
+
+34
+
+Future career plans
+
+Please use the scale below to indicate how likely you are to pursue one
+of these career paths upon completion of your programme.
+
+Scale
+
+35
+
+Future career plans
+
+If you're unlikely to pursue an academic research career, what are the
+main reasons?
+
+Multiple choice
+
+36
+
+Future career plans
+
+What position do you most expect to occupy immediately after you
+complete your degree?
+
+Single choice
+
+37
+
+Future career plans
+
+What type of career you are interested in pursuing after your graduate
+degree?
+
+Open
+
+38
+
+Career expectations
+
+After completing your PhD, how long do you think it will take you to
+find a permanent (non-trainee) position?
+
+Single choice
+
+39
+
+Career expectations
+
+How much more likely are you now to pursue a research career than when
+you launched your PhD programme?
+
+Single choice
+
+40
+
+Career expectations
+
+What is the main reason why you are more likely to pursue a research
+career?
+
+Single choice
+
+41
+
+Career expectations
+
+How did you arrive at your current career decision?
+
+Multiple choice
+
+42
+
+Career support
+
+How do you learn about available career opportunities that are beyond
+academia?
+
+Multiple choice
+
+43
+
+Career support
+
+Which of the following 3 things would you say are the most difficult for
+PhD students in your discipline?
+
+Multiple choice
+
+44
+
+Career support
+
+Which of the following would you say are the most difficult for PhD
+students in the country where you are studying?
+
+Multiple choice
+
+45
+
+Career support
+
+Which of the following resources do you think PhD students need the most
+in order to establish a satisfying career?
+
+Multiple choice
+
+46
+
+Career support
+
+How well is your programme preparing you to carry out each of the
+following activities?
+
+Scale
+
+47
+
+Career support
+
+To what extent do you agree or disagree with the following statements?
+
+Scale
+
+48
+
+Career support
+
+Which, if any, of the following activities have you done to advance your
+career?
+
+Multiple choice
+
+49
+
+Career support
+
+Which of the following social media networks have you used to build your
+professional network?
+
+Multiple choice
+
+50
+
+Reflection
+
+What would you do differently right now if you were starting your
+programme?
+
+Multiple choice
+
+51
+
+Reflection
+
+With the benefit of hindsight, what one thing do you know now which you
+wish you'd known about when you started your PhD?
+
+Open
+
+52
+
+Reflection
+
+What is your age?
+
+Single choice
+
+53
+
+Reflection
+
+Are you\ldots{} (Gender)
+
+Single choice
+
+54
+
+Reflection
+
+Which of the following best describes you? (Ethnicity)
+
+Multiple choice
+
+55
+
+Reflection
+
+Do you have any caring responsibilities?
+
+Multiple choice
+
+56
+
+Reflection
+
+Thank you for taking part in the survey. Are there any more comments
+you'd like to share with us?
+
+Open
+
+57
+
+Thank you
+
+Would you like to be entered into a prize draw for a chance to win GBP
+£250? You can find prize draw terms and conditions here. Shift Learning
+will be administering the incentive and a winner will be contacted
+within 4 weeks of the survey closing date.
+
+Single choice
+
+58
+
+Thank you
+
+Nature may want to contact you again to ask for more information on the
+subjects discussed in this survey, or to ask you specific questions
+about your comments and answers. Are you happy to receive follow up
+requests?
+
+Single choice
+
+59
+
+Thank you
+
+Springer Nature is keen to update PhD students with advice and
+information about their programme and career options via a regular
+newsletter. Would you like to be kept informed about this planned
+service from Nature Careers?
+
+Single choice
+
+60
+
+Thank you
+
+Shift Learning carry out paid research in the education sector
+throughout the year. Would you be happy to be contacted about relevant
+future research opportunities?
+
+Single choice
+
+61
+
+Thank you
+
+Please fill in your contact details below.
+
+Open
 
 After careful consideration, we have only used certain variables for our
 analysis. Below is a dataframe with these variables:
 
-\begin{tabular}{l|l|l}
-\hline
-Variables & Type & Description\\
-\hline
-Gender & factor & Female (including trans female) / Male (including trans male) / Gender queer\\
-\hline
-Studying in your home country & factor & Yes / No\\
-\hline
-Level of satisfaction with PhD & factor & 1-5 Scale (1 - Very dissatisfied / 5 - Very satisfied)\\
-\hline
-Supervisor Relationship & factor & 1-7 Scale (1 - Not at all satisfied / 7 - Extremely satisfied\\
-\hline
-Work Life Balance & factor & 1-5 Scale (1 - Strongly disagree / 5 - Strongly agree\\
-\hline
-University Long Hours Culture & factor & 1-5 Scale (1 - Strongly disagree / 5 - Strongly agree\\
-\hline
-Anxiety or Depression caused by PhD & factor & Yes / No / Prefer not to say\\
-\hline
-Experienced Bullying in PhD & factor & Yes / No / Prefer not to say\\
-\hline
-Experienced Discrimination or Harrassment in PhD & factor & Yes / No / Prefer not to say\\
-\hline
-\end{tabular}
+Variables
+
+Type
+
+Description
+
+Gender
+
+factor
+
+Female (including trans female) / Male (including trans male) / Gender
+queer
+
+Studying in your home country
+
+factor
+
+Yes / No
+
+Level of satisfaction with PhD
+
+factor
+
+1-5 Scale (1 - Very dissatisfied / 5 - Very satisfied)
+
+Supervisor Relationship
+
+factor
+
+1-7 Scale (1 - Not at all satisfied / 7 - Extremely satisfied
+
+Work Life Balance
+
+factor
+
+1-5 Scale (1 - Strongly disagree / 5 - Strongly agree
+
+University Long Hours Culture
+
+factor
+
+1-5 Scale (1 - Strongly disagree / 5 - Strongly agree
+
+Anxiety or Depression caused by PhD
+
+factor
+
+Yes / No / Prefer not to say
+
+Experienced Bullying in PhD
+
+factor
+
+Yes / No / Prefer not to say
+
+Experienced Discrimination or Harrassment in PhD
+
+factor
+
+Yes / No / Prefer not to say
 
 \hypertarget{methods}{%
 \subsubsection{Methods}\label{methods}}
@@ -483,6 +859,12 @@ to investigate, described in the \textbf{research question} section.
 \paragraph{LR1: Long Hours Culture \textasciitilde{} PhD
 Satisfaction}\label{lr1-long-hours-culture-phd-satisfaction}}
 
+Interestingly, there isn't a clear trend in the relationship between
+long hours culture \& satisfaction. It is true that those dissatisfied
+with their decision (1 \& 2 in the x axis) seem to have a higher
+probability of their university having a long hours culture, but aside
+from that, there is no clear pattern.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"images"}\NormalTok{, }\StringTok{"logisticregression.png"}\NormalTok{), }\DataTypeTok{auto_pdf =} \KeywordTok{getOption}\NormalTok{(}\StringTok{"knitr.graphics.auto_pdf"}\NormalTok{, }\OtherTok{FALSE}\NormalTok{), }
@@ -495,6 +877,14 @@ Satisfaction}\label{lr1-long-hours-culture-phd-satisfaction}}
 \hypertarget{lr2-supervisor-relationship-phd-satisfaction}{%
 \paragraph{LR2: Supervisor Relationship \textasciitilde{} PhD
 Satisfaction}\label{lr2-supervisor-relationship-phd-satisfaction}}
+
+It appears that probability of satisfaction does increase as the
+supervisor relationship goes from very dissatisfied (1) to very
+satisfied (7). However, the trend is not as pronounced as one may expect
+in this case either. Findings in the second graph match those that
+result from logistic regression, and indeed confirm that students that
+have a good relationship with their supervisor are more satisfied with
+their decision to pursue a PhD than those that don't.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -518,6 +908,11 @@ Satisfaction}\label{lr2-supervisor-relationship-phd-satisfaction}}
 \paragraph{LR3: Work/Life Balance \textasciitilde{} PhD
 Satisfaction}\label{lr3-worklife-balance-phd-satisfaction}}
 
+Out of all of our analysis, this one shows one of the most pronounced
+relationships - there is a strong trend between students that are more
+satisfied with their decision to pursue a PhD and a probability of
+having a good work/life balance, which stays true in our jitter graph.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"images"}\NormalTok{, }\StringTok{"logisticregression5.png"}\NormalTok{), }\DataTypeTok{auto_pdf =} \KeywordTok{getOption}\NormalTok{(}\StringTok{"knitr.graphics.auto_pdf"}\NormalTok{, }\OtherTok{FALSE}\NormalTok{), }
@@ -540,6 +935,12 @@ Satisfaction}\label{lr3-worklife-balance-phd-satisfaction}}
 \paragraph{LR4: Supervisor Relationship \textasciitilde{} Anxiety or
 Depression}\label{lr4-supervisor-relationship-anxiety-or-depression}}
 
+We had a great interest in mental health markers in graduate school,
+with anxiety or depression being the clearest to measure out of the
+survey variables. There is a positive relationship between having a good
+relationship with your supervisor and a low probability of seeking help
+for anxiety or depression, which matches our hypothesis.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"images"}\NormalTok{, }\StringTok{"logisticregression3.png"}\NormalTok{), }\DataTypeTok{auto_pdf =} \KeywordTok{getOption}\NormalTok{(}\StringTok{"knitr.graphics.auto_pdf"}\NormalTok{, }\OtherTok{FALSE}\NormalTok{), }
@@ -553,6 +954,9 @@ Depression}\label{lr4-supervisor-relationship-anxiety-or-depression}}
 \paragraph{LR5: Studying Outside of your Home Country \textasciitilde{}
 Anxiety or
 Depression}\label{lr5-studying-outside-of-your-home-country-anxiety-or-depression}}
+
+Studying in your home country and seeking help for anxiety or depression
+do not appear to be correlated when running a logistic regression.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -568,6 +972,9 @@ Depression}\label{lr5-studying-outside-of-your-home-country-anxiety-or-depressio
 Discrimination or
 Harrassment}\label{lr6-studying-outside-of-your-home-country-discrimination-or-harrassment}}
 
+Although seemingly weak, there does appear to be a correlation between
+study location and having experienced discrimination or harrassment.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"images"}\NormalTok{, }\StringTok{"logisticregression6.png"}\NormalTok{), }\DataTypeTok{auto_pdf =} \KeywordTok{getOption}\NormalTok{(}\StringTok{"knitr.graphics.auto_pdf"}\NormalTok{, }\OtherTok{FALSE}\NormalTok{), }
@@ -581,6 +988,9 @@ Harrassment}\label{lr6-studying-outside-of-your-home-country-discrimination-or-h
 \paragraph{LR7: Gender \textasciitilde{} Discrimination or
 Harrassment}\label{lr7-gender-discrimination-or-harrassment}}
 
+There are different correlations between each gender and discrimination
+or harrassment.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"images"}\NormalTok{, }\StringTok{"logisticregression7.png"}\NormalTok{), }\DataTypeTok{auto_pdf =} \KeywordTok{getOption}\NormalTok{(}\StringTok{"knitr.graphics.auto_pdf"}\NormalTok{, }\OtherTok{FALSE}\NormalTok{), }
@@ -593,11 +1003,25 @@ Harrassment}\label{lr7-gender-discrimination-or-harrassment}}
 \hypertarget{discussion-and-conclusion}{%
 \subsection{Discussion and Conclusion}\label{discussion-and-conclusion}}
 
-\emph{Complete later.}
+While we have certainly found some relationships between our variables
+of interest, these have proven weaker than originally expected. This
+makes sense given the complexity of the variables - the level of
+satisfaction that a student may feel with their decision to pursue a PhD
+is probably due to the added effect of many variables rather than to a
+single factor, meaning that a relationship between two variables alone
+is an incomplete picture of everything that may be taken into account.
+Nonetheless, it was still interesting to investigate these relationships
+and work with this dataset. Unfortunately, it did prove quite
+challenging to use a dataset with many categorical variables that
+required a lot of fixing, converting answers to scales, and ultimately
+running logistic regression rather than linear, as the latter is
+unbounded and cannot be used for categorical variables.
 
 \hypertarget{references}{%
 \subsection{References}\label{references}}
 
-\emph{Complete later.}
+Nature.com. 2020. Phds: The Tortuous Truth. {[}online{]} Available at:
+\url{https://www.nature.com/articles/d41586-019-03459-7} {[}Accessed 17
+March 2020{]}.
 
 \end{document}
