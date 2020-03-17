@@ -40,6 +40,7 @@ library(docopt)
 library(janitor)
 library(glue)
 ```
+## Manual Usage
 
 3. Run the following scripts (in order) with the appropriate arguments specified
 
@@ -65,3 +66,15 @@ library(glue)
   
   - Knit final report:
     *complete when report is uploaded*
+
+## GNU MAKE Usage
+
+In order to delete all outputted images and docs created by this analysis, enter this from the terminal:
+```
+make clean
+```
+In order to run entire analysis from start to finish, enter this from the terminal:
+```
+make all
+```
+Making all will call a series of scripts in sequence in order to produce the entire analysis
