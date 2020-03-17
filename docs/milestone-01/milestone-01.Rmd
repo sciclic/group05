@@ -32,7 +32,7 @@ According to the script with survey information that was provided, there were a 
 In the dataset, each row represents an individual who participated in the survey, whereas each row represents a question. We have noticed some redundancy in the dataset column that will require substantial cleanup of the data as part of our next project milestone. For instance, Q12 ("What prompted you to study outside your country of upbringing?") was presented in the survey as a multiple choice question with 11 possible answers (a-k), with the last one (k) being open-form ("If other, please specify"). In the data frame, 11 rows correspond to Q12, each one composed of 2 values: NA, and 1/11 possible answers. As such, the column named Q12_1 only contains NA values and answer "(a) To study at a specific university"; whereas Q12_2 only contains NA values and answer "(b) Lack of funding opportunities in my home country", and so on. We plan on combining columns Q12_1:Q12_11 into a single Q12 column using dplyr::coalesce(), following the same rationale for other redundant columns in the dataset. In addition, open-form questions such as (k) in this specific example will be dropped due to the difficulty in analyzing this, and the fact that they contain answers in different languages.
 
 ```{r survey-dataset, warning=FALSE}
-survey_data <- readxl::read_xlsx(here::here("docs", "Nature_PhD_Survey.xlsx"))
+survey_data <- readxl::read_xlsx(here::here("data", "Nature_PhD_Survey.xlsx"))
 dim(survey_data)
 ```
 
