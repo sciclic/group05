@@ -77,4 +77,4 @@ In order to run entire analysis from start to finish, enter this from the termin
 ```
 make all
 ```
-Making all will call a series of scripts in sequence in order to produce the entire analysis
+Make all will call a series of scripts (outlined in "Manual Usage" above) in sequence in order to produce the entire analysis
