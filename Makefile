@@ -9,7 +9,8 @@ survey_data.csv : scripts/clean.R
 	Rscript scripts/clean.R --filepath="data/survey_raw.csv"
 
 # Exploratory Data Analysis
-
+images/basic_demographics1.png images/satisfaction_v_supervis_relationship.png images/satisfaction_v_work_life_bal.png : scripts/EDA.R
+	Rscript scripts/EDA.R --filepath="data/survey_data.csv"
 
 # Knit report
 
