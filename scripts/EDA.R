@@ -1,3 +1,8 @@
+"This script loads in a cleaned data file and runs an exploraroty data analysis.
+
+Usage: clean.R --filepath=<filepath>
+" -> doc
+
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
@@ -5,9 +10,16 @@ library(stringr)
 library(purrr)
 library(here)
 library(corrplot)
+library(docopt)
+
+opt <- docopt(doc)
+
+main <- function(filepath){
+  
+## Load the csv
+survey_data <- read_csv(filepath)
 
 #Load in survey_data csv file
-survey_data <- read.csv(here::here("data", "survey_data.csv"))
 
 #Create images folder
 dir.create("images")
@@ -53,3 +65,6 @@ corrplot(correlations,
 
 #Print complete message
 print("Exploratory Data Analysis complete!")
+}
+
+main(opt$filepath)
