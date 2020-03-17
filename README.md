@@ -22,7 +22,7 @@ A brief directory for easy navigation of our project repo.
 
 Data used for this project is publicly available with a C4 Creative Commons license [here](https://figshare.com/s/74a5ea79d76ad66a8af8) and it is the result of a survey developed by Nature magazine. 
 
-# Usasge
+# Usage
 
 1. Clone this repo.
 
@@ -39,13 +39,25 @@ Data used for this project is publicly available with a C4 Creative Commons lice
 
 3. Run the following scripts (in order) with the appropriate arguments specified
 
-  - Download data:  
+  - Download data: [(load.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/load.R) 
+    ```
     Rscript scripts/load.R 'https://ndownloader.figshare.com/files/18543320?private_link=74a5ea79d76ad66a8af8'
+    ```
   
-  - Wrangle/clean/process data:   
+  - Wrangle/clean/process data: [(clean.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/clean.R)
+    ```
     Rscript scripts/clean.r
+    ```
   
-  - EDA script to export images:  
+  - EDA script to export images: [(EDA.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/EDA.R)
+    ```
     Rscript scripts/EDA.r
+    ```
+    
+  - Analysis script with logistic regression models: [(analysis.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/analysis.R)
+    ```
+    Rscript scripts/analysis.R --data_path="data/" --data_file="survey_data.csv"
+    ```
   
-  Knit your draft final report
+  - Knit final report:
+    *complete when report is uploaded*
