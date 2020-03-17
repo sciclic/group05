@@ -1,0 +1,169 @@
+---
+title: "Final Report"
+author: "Iciar Fernandez Boyano, Jacob Gerlofs"
+output:
+  pdf_document: default
+  html_document:
+    self_contained: no
+    df_print: paged
+always_allow_html: true
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r libraries, echo= FALSE, warnings = FALSE, echo= FALSE, message=FALSE}
+library(here)
+library(tidyverse)
+library(lubridate) 
+library(tidyquant)
+library(DT)
+library(broom)
+library(modelr)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(tinytex)
+```
+
+
+# The Mental Health Toll of Graduate School
+
+## Introduction
+
+For the past five years, the iconic science journal Nature has launched a survey for PhD students in STEM fields to share their experience in graduate school, hoping to illuminate the goals, challenges, and sources of satisfaction for doctoral students across seven continents. Last year's survey collected data from over 6000 graduate students, which constitutes the highest response rate in the survey's history. The full data from the survey was made publicly available following publication of an article discussing the results. It is interesting to note that the survey was offered in English, Spanish, Chinese, French, and Portuguese - open-form questions have not been translated to English if answered by the participant in another language. Available materials include anonymysed raw data, the questionnaire that was provided to PhD students, and a presentation of the survey data.
+
+In our project, we aim to investigate the relationship between these two question areas (mental health & feelings of harrasment/bullying) and other variables that we hypothesise may be related to positive and/or negative outcomes. For example, are those pursuing a degree far from home more likely to suffer from anxiety and depression? Are instances of harrasment and/or bullying male-biased? In an effort to shed some light into the matter, we will study these questions in detail.
+
+## Research question
+
+Rather than a single question, the many variables available as part of our dataset has allowed us to investigate several relationships. 
+
+1. **PhD Satisfaction.** We hypothesise that the level of satisfaction that a graduate student may feel with their decision to pursue a PhD program may be associated with (1) their university's long hours culture, (2) their work/life balance, and (3) their relationship with their supervisor. 
+
+2. **Suffering from anxiety or depression caused by PhD studies.** We are interested in seeing whether this variable is influenced by (1) the student's relationship with their supervisor, and (2) studying outside of their home country. 
+
+3. **Suffering from discrimination or harrassment**. We have investigated the relationship of this variable with (1) studying outside of your home country, and (2) the student's gender. 
+## Data and methods
+
+### Data Description
+
+According to the script with survey information that was provided, there were a total of 65 questions. Not all questions were mandatory, and there was a mix of single choice (yes/no), multiple choice (several options) and free-form questions.
+
+In the dataset, each row represents an individual who participated in the survey, whereas each row represents a question. We have noticed some redundancy in the dataset column that will require substantial cleanup of the data as part of our next project milestone. For instance, Q12 ("What prompted you to study outside your country of upbringing?") was presented in the survey as a multiple choice question with 11 possible answers (a-k), with the last one (k) being open-form ("If other, please specify"). In the data frame, 11 rows correspond to Q12, each one composed of 2 values: NA, and 1/11 possible answers. As such, the column named Q12_1 only contains NA values and answer "(a) To study at a specific university"; whereas Q12_2 only contains NA values and answer "(b) Lack of funding opportunities in my home country", and so on. We plan on combining columns Q12_1:Q12_11 into a single Q12 column using dplyr::coalesce(), following the same rationale for other redundant columns in the dataset. In addition, open-form questions such as (k) in this specific example will be dropped due to the difficulty in analyzing this, and the fact that they contain answers in different languages. 
+
+Due to this redundancy, the dimensions of the raw dataset when downloaded are 6812 rows (participants) by 274 columns (questions), whereas the actual survey only has 63 questions. Below is the complete list of questions, which is a simplified version of the Word document provided here, which includes all the possible answers for each question. For simplicity, we have only included the question, its type, and the category it belongs to within the survey.
+
+```{r survey-questions, echo=FALSE, warning=FALSE, message=FALSE}
+survey_questions <- readxl::read_xlsx(here::here("data", "survey_questions.xlsx"))
+dim(survey_questions) # 63 (questions) by 4 columns (question number, category, question, and type)
+knitr::kable(survey_questions) %>% kableExtra::kable_styling(bootstrap_options = "condensed", full_width=F, fixed_thead=TRUE) # print
+```
+
+After careful consideration, we have only used certain variables for our analysis. Below is a dataframe with these variables:
+
+```{r echo = FALSE, results='asis'}
+Variables = c("Gender", "Studying in your home country", "Level of satisfaction with PhD", "Supervisor Relationship", "Work Life Balance", "University Long Hours Culture", "Anxiety or Depression caused by PhD", "Experienced Bullying in PhD", "Experienced Discrimination or Harrassment in PhD")
+Type = c("factor", "factor", "factor", "factor", "factor",
+         "factor", "factor", "factor", "factor")
+Description = c("Female (including trans female) / Male (including trans male) / Gender queer",
+                "Yes / No",
+                "1-5 Scale (1 - Very dissatisfied / 5 - Very satisfied)",
+                "1-7 Scale (1 - Not at all satisfied / 7 - Extremely satisfied",
+                "1-5 Scale (1 - Strongly disagree / 5 - Strongly agree",
+                "1-5 Scale (1 - Strongly disagree / 5 - Strongly agree",
+                "Yes / No / Prefer not to say",
+                "Yes / No / Prefer not to say",
+                "Yes / No / Prefer not to say")
+variables_table = data.frame(Variables, Type, Description)
+kable(variables_table)
+```
+
+
+### Methods
+
+Instead of linear regression, we have chosen logistic regression as the statistical method to investigate the relationships that we have outlined above in our "Research Question" section for our data. Logistic regression is used when the dependent variable is categorical, which is our case. Linear regression is not suitable for a classification problem because it is unbounded.
+
+## Results
+
+Prior to logistic regression, we performed some exploratory data analysis in our data as part of [milestone 1](https://github.com/STAT547-UBC-2019-20/group05/tree/master/docs/milestone-01).
+
+### Exploratory data analysis
+
+#### General Demographics of Graduate Students in the Survey
+
+![](here::here("images", "basic_demographics1.png"))
+
+While the survey was available in several languages, which we assume was an attempt to improve outreach, it is clear that the respondents origin is highly biased to those located in Europe, closely followed by Asia and North America.  
+
+### Logistic regression
+
+We then perform logistic regression of the relationships that we attempt to investigate, described in the **research question** section. 
+
+#### LR1: Long Hours Culture ~ PhD Satisfaction
+
+```{r}
+knitr::include_graphics(here::here("images", "logisticregression.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
+    dpi = NULL)
+```
+
+#### LR2: Supervisor Relationship ~ PhD Satisfaction
+
+```{r}
+knitr::include_graphics(here::here("images", "logisticregression2.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
+    dpi = NULL)
+
+knitr::include_graphics(here::here("images", "satisfaction_v_supervis_relationship.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
+    dpi = NULL)
+```
+
+#### LR3: Work/Life Balance ~ PhD Satisfaction
+
+```{r}
+knitr::include_graphics(here::here("images", "logisticregression5.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
+    dpi = NULL)
+
+knitr::include_graphics(here::here("images", "satisfaction_v_work_life_bal.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
+    dpi = NULL)
+```
+
+#### LR4: Supervisor Relationship ~ Anxiety or Depression
+
+```{r}
+knitr::include_graphics(here::here("images", "logisticregression3.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
+    dpi = NULL)
+```
+
+#### LR5: Studying Outside of your Home Country ~ Anxiety or Depression
+
+```{r}
+knitr::include_graphics(here::here("images", "logisticregression4.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
+    dpi = NULL)
+```
+
+#### LR6: Studying Outside of your Home Country ~ Discrimination or Harrassment
+
+```{r}
+knitr::include_graphics(here::here("images", "logisticregression6.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
+    dpi = NULL)
+```
+
+#### LR7: Gender ~ Discrimination or Harrassment
+
+```{r}
+knitr::include_graphics(here::here("images", "logisticregression7.png"), auto_pdf = getOption("knitr.graphics.auto_pdf", FALSE), 
+    dpi = NULL)
+```
+
+## Discussion and Conclusion
+
+*Complete later.*
+
+## References
+
+*Complete later.*
+
+
+
+
+
+
