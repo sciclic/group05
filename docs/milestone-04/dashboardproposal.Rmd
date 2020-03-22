@@ -1,0 +1,21 @@
+---
+title: "Dashboard Proposal"
+author: "Icíar Fernández Boyano"
+date: "21/03/2020"
+output: html_document
+---
+
+# A map to finding satisfaction in your PhD
+#### *Data-driven sources of happiness in graduate school*
+
+## Introduction 
+
+This folder contains the requirements for Task #2 of Milestone 4. Detailed [instructions](https://stat545.stat.ubc.ca/evaluation/milestone_04/milestone_04/) on what is expected from this assignment are in the STAT547 website under [team projects](https://stat545.stat.ubc.ca/evaluation/projects/). Task #1 entails addressing student feedback on our project progress thus far, and is not in this folder.
+
+## Description (~300 words)
+
+## Usage Scenario
+
+## Example sketch
+
+
