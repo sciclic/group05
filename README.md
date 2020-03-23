@@ -46,6 +46,7 @@ library(kableExtra)
 library(modelr)
 library(tidyquant)
 library(DT)
+library(readxl)
 ```
 ## Manual Usage
 
@@ -58,12 +59,12 @@ library(DT)
   
   - Wrangle/clean/process data: [(clean.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/clean.R)
     ```
-    Rscript scripts/clean.r --filepath="data/survey_raw.csv"
+    Rscript scripts/clean.R --filepath="data/survey_raw.csv"
     ```
   
   - EDA script to export images: [(EDA.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/EDA.R)
     ```
-    Rscript scripts/EDA.r --filepath="data/survey_data.csv"
+    Rscript scripts/EDA.R --filepath="data/survey_data.csv"
     ```
     
   - Analysis script with logistic regression models: [(analysis.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/analysis.R)
@@ -79,7 +80,7 @@ library(DT)
 ## GNU MAKE Usage
 
 The repo contains a [Makfile](https://github.com/STAT547-UBC-2019-20/group05/blob/master/Makefile) which can be referenced for all the target scripts and outputs. All of the scripts in Manual Usage (above) are contained within this Makefile, along with make all and clean all options.
-
+ 
 In order to delete all outputted images and docs created by this analysis, enter this from the terminal:
 ```
 make clean

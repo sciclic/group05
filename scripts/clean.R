@@ -3,12 +3,12 @@
 Usage: clean.R --filepath=<filepath>
 " -> doc
 
-library(tidyverse)
-library(janitor)
-library(dplyr)
-library(here)
-library(stringr)
-library(docopt)
+suppressMessages(library(tidyverse))
+suppressMessages(library(janitor))
+suppressMessages(library(dplyr))
+suppressMessages(library(here))
+suppressMessages(library(stringr))
+suppressMessages(library(docopt))
 
 opt <- docopt(doc)
 
@@ -250,7 +250,7 @@ for (i in 1:length(survey_data$university_offers_a_variety_of_support_resources)
 }
 
 # Save object
-write.csv(survey_data, here::here("data", "survey_data.csv"))
+write_csv(survey_data, here::here("data", "survey_data.csv"))
 
 #Print complete message
 print("Data cleaning is complete!")

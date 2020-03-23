@@ -1,13 +1,14 @@
 
-"This script takes in a data file and exports a csv in the data folder.
+"This script downloads an online data file (via URL) and exports this data file into csv in the data folder.
 
 Usage: scripts/load.R <url_to_read>" -> doc
 
 
-library(tidyverse)
-library(here)
-library(docopt)
-library(RCurl)
+suppressMessages(library(tidyverse))
+suppressMessages(library(here))
+suppressMessages(library(docopt))
+suppressMessages(library(RCurl))
+suppressMessages(library(readxl))
 
 opt <- docopt(doc)
 
