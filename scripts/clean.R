@@ -3,12 +3,12 @@
 Usage: clean.R --filepath=<filepath>
 " -> doc
 
-library(tidyverse)
-library(janitor)
-library(dplyr)
-library(here)
-library(stringr)
-library(docopt)
+suppressMessages(library(tidyverse))
+suppressMessages(library(janitor))
+suppressMessages(library(dplyr))
+suppressMessages(library(here))
+suppressMessages(library(stringr))
+suppressMessages(library(docopt))
 
 opt <- docopt(doc)
 

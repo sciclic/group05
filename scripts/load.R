@@ -4,10 +4,11 @@
 Usage: scripts/load.R <url_to_read>" -> doc
 
 
-library(tidyverse)
-library(here)
-library(docopt)
-library(RCurl)
+suppressMessages(library(tidyverse))
+suppressMessages(library(here))
+suppressMessages(library(docopt))
+suppressMessages(library(RCurl))
+suppressMessages(library(readxl))
 
 opt <- docopt(doc)
 

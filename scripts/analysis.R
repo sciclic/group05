@@ -9,16 +9,16 @@
 Usage: analysis.R --data_path=<path> --data_file=<datafilename> 
   " -> doc
 
-library(docopt)
-library(here)
-library(tidyverse)
-library(knitr)
-library(lubridate)
-library(ggplot2)
-library(corrplot)
-library(dotwhisker)
-library(here)
-library(broom)
+suppressMessages(library(docopt))
+suppressMessages(library(here))
+suppressMessages(library(tidyverse))
+suppressMessages(library(knitr))
+suppressMessages(library(lubridate))
+suppressMessages(library(ggplot2))
+suppressMessages(library(corrplot))
+suppressMessages(library(dotwhisker))
+suppressMessages(library(here))
+suppressMessages(library(broom))
 
 opt <- docopt(doc)
 

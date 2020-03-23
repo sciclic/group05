@@ -46,6 +46,7 @@ library(kableExtra)
 library(modelr)
 library(tidyquant)
 library(DT)
+library(readxl)
 ```
 ## Manual Usage
 

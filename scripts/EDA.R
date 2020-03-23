@@ -3,14 +3,14 @@
 Usage: clean.R --filepath=<filepath>
 " -> doc
 
-library(tidyverse)
-library(dplyr)
-library(ggplot2)
-library(stringr)
-library(purrr)
-library(here)
-library(corrplot)
-library(docopt)
+suppressMessages(library(tidyverse))
+suppressMessages(library(dplyr))
+suppressMessages(library(ggplot2))
+suppressMessages(library(stringr))
+suppressMessages(library(purrr))
+suppressMessages(library(here))
+suppressMessages(library(corrplot))
+suppressMessages(library(docopt))
 
 opt <- docopt(doc)
 
