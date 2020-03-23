@@ -58,12 +58,12 @@ library(DT)
   
   - Wrangle/clean/process data: [(clean.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/clean.R)
     ```
-    Rscript scripts/clean.r --filepath="data/survey_raw.csv"
+    Rscript scripts/clean.R --filepath="data/survey_raw.csv"
     ```
   
   - EDA script to export images: [(EDA.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/EDA.R)
     ```
-    Rscript scripts/EDA.r --filepath="data/survey_data.csv"
+    Rscript scripts/EDA.R --filepath="data/survey_data.csv"
     ```
     
   - Analysis script with logistic regression models: [(analysis.R)](https://github.com/STAT547-UBC-2019-20/group05/blob/master/scripts/analysis.R)
