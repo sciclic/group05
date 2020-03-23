@@ -79,7 +79,7 @@ library(DT)
 ## GNU MAKE Usage
 
 The repo contains a [Makfile](https://github.com/STAT547-UBC-2019-20/group05/blob/master/Makefile) which can be referenced for all the target scripts and outputs. All of the scripts in Manual Usage (above) are contained within this Makefile, along with make all and clean all options.
-
+ 
 In order to delete all outputted images and docs created by this analysis, enter this from the terminal:
 ```
 make clean
