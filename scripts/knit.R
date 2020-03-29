@@ -1,7 +1,7 @@
 "This script knits the final report together.
 Usage: scripts/knit.R --finalreport=<finalreport>" -> doc
 
-library(docopt)
+suppressMessages(library(docopt))
 
 opt <- docopt(doc)
 
