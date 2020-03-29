@@ -92,7 +92,7 @@ tableplot(data_to_plot$satisfaction_now, data_to_plot$satisfaction_decision) # s
 
 
 # Save object
-write.csv(survey_data, here::here("data", "survey_data.csv"))
+write.csv(survey_data, here::here("data", "survey_dash.csv"))
 
 #Print complete message
 print("EDA for Dashboard is complete!")
