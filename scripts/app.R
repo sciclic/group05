@@ -147,26 +147,31 @@ div_main <- htmlDiv(
        htmlBr(),
        graph,
        htmlBr(),
-       htmlBr()
-       #graph2
-  ), style = list('flex-basis' = '50%',
-                  'justify-content' = 'center',
-                  'padding' = 10)
-)
-
-div_main1 <- htmlDiv(
-  list(htmlBr(),
+       htmlBr(),
+       htmlBR(),
        htmlLabel('Filter by age range :'),
        slider,
        htmlBr(),
        satisfaction_decision,
        htmlBr(),
        htmlBr()
-       #graph2
-  ), style = list('flex-basis' = '50%',
+  ), style = list('flex-basis' = '70%',
                   'justify-content' = 'center',
-                  'padding' = 10)
+                  'padding' = 20)
 )
+
+# div_main1 <- htmlDiv(
+#   list(htmlBr(),
+#        htmlLabel('Filter by age range :'),
+#        slider,
+#        htmlBr(),
+#        satisfaction_decision,
+#        htmlBr(),
+#        htmlBr()
+#   ), style = list('flex-basis' = '50%',
+#                   'justify-content' = 'center',
+#                   'padding' = 10)
+# )
 
 
 # SPECIFY APP LAYOUT
@@ -176,8 +181,8 @@ app$layout(
   htmlDiv(
     list(
       div_sidebar,
-      div_main,
-      div_main1
+      div_main
+      #div_main1
     ), style = list('display' = 'flex',
                     backgroundColor = '#FOF6F7FF')
   )
