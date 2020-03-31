@@ -121,7 +121,8 @@ div_main <- htmlDiv(
        htmlBr()
        #graph2
   ), style = list('flex-basis' = '60%',
-                  'justify-content' = 'center')
+                  'justify-content' = 'center',
+                  'padding' = 10)
 )
 
 
