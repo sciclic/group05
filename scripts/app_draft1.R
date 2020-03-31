@@ -78,7 +78,8 @@ div_header <- htmlDiv(
                   textAlign = 'left',
                   color = 'white',
                   margin = 0,
-                  marginTop = 0)
+                  marginTop = 0,
+                  'padding' = 10)
 )
 
 div_sidebar <- htmlDiv(
@@ -91,13 +92,16 @@ div_sidebar <- htmlDiv(
                   backgroundColor = '#C0476B',
                   textAlign = 'left',
                   color = 'white',
-                  margin = 0,
-                  marginTop = 0)
+                  margin = 5,
+                  marginTop = 0,
+                  'padding' = 8)
 )
 
 div_main <- htmlDiv(
   list(htmlLabel('Select predictor of satisfaction:'),
+       htmlBr(),
        yaxisDropdown,
+       htmlBr(),
        graph
   ), style = list('flex-basis' = '60%')
 )
@@ -130,7 +134,7 @@ app$callback(
 
 
 # RUN APP
-app$run_server(debug=FALSE)
+app$run_server(debug=TRUE)
 
 # command to add dash app in Rstudio viewer:
 # rstudioapi::viewer("http://127.0.0.1:8050")
