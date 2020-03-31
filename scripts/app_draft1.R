@@ -7,7 +7,7 @@ library(plotly)
 library(gapminder)
 
 # CREATE DASH INSTANCE
-app <- Dash$new()
+app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.css")
 
 
 # LOAD IN DATASETS
@@ -61,8 +61,8 @@ make_plot <- function(yaxis = "Quality of Supervisor Relationship"){
 
 # ASSIGN COMPONENTS TO VARIABLES
 heading_title <- htmlH1('Finding satisfaction in your PhD')
-heading_subtitle <- htmlH2('A data based approach to the sources of satisfaction in graduate school')
-description <- dccMarkdown("In Nature's yearly survey of over 6000 graduate students, 
+heading_subtitle <- htmlH3('A data based approach to the sources of satisfaction in graduate school')
+description <- dccMarkdown("   In Nature's yearly survey of over 6000 graduate students, 
 positives outweigh the negatives. 
 75% of students pursuing graduate research are at least somewhat satisfied with their decision to pursue a career on doctoral research. 
 Nonetheless, survey questions that dig into the mental health toll of this career path reveal a perilous journey for most. 
@@ -71,8 +71,8 @@ and a similar percentage declaring that their university does not promote a heal
 survey answers in this area raise concerns about the mental health status of doctoral students. 
 Harrasment and bullying also remain distressingly commonplace.
 
-In our project, we aim to investigate the relationship between these two question areas 
-(mental health & feelings of harrasment/bullying) and other variables that we hypothesise may be related to positive and/or negative outcomes. 
+   **In our project, we aim to investigate the relationship between these two question areas 
+(mental health & feelings of harrasment/bullying) and other variables that we hypothesise may be related to positive and/or negative outcomes.** 
 For example, are those pursuing a degree far from home more likely to suffer from anxiety and depression? Are instances of harrasment and/or bullying male-biased? 
 In an effort to shed some light into the matter, we will study these questions in detail.")
 source <- dccMarkdown("[Data Source](https://www.nature.com/articles/d41586-019-03459-7)")
@@ -114,14 +114,14 @@ div_sidebar <- htmlDiv(
 div_main <- htmlDiv(
   list(htmlBr(),
        htmlLabel('Select predictor of satisfaction:'),
-       htmlBr(),
        yaxisDropdown,
        htmlBr(),
        graph,
        htmlBr(),
        htmlBr()
        #graph2
-  ), style = list('flex-basis' = '60%')
+  ), style = list('flex-basis' = '60%',
+                  'justify-content' = 'center')
 )
 
 
@@ -152,7 +152,7 @@ app$callback(
 
 
 # RUN APP
-app$run_server(debug=FALSE)
+app$run_server(debug=TRUE)
 
 # command to add dash app in Rstudio viewer:
 # rstudioapi::viewer("http://127.0.0.1:8050")
