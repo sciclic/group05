@@ -79,8 +79,8 @@ satisfaction_decision <- function(survey_data){
 # ASSIGN COMPONENTS TO VARIABLES
 heading_title <- htmlH1('Finding satisfaction in your PhD')
 heading_subtitle <- htmlH2('A data based approach to the sources of satisfaction in graduate school')
-graph1 = dccGraph(id='satisfaction_now',figure = make_plot())
-graph2 = dccGraph(id='satisfaction_decision',figure = make_plot1())
+graph1 = dccGraph(id='satisfaction_now',figure = satisfaction_now())
+graph2 = dccGraph(id='satisfaction_decision',figure = satisfaction_decision())
 
 # DROPDOWNS
 
