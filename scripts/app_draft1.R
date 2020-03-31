@@ -38,7 +38,7 @@ make_plot <- function(yaxis = "Quality of Supervisor Relationship"){
   # gets the label matching the column value
   data <- survey_data
   p <- ggplot(data, aes(x = level_of_satisfaction_with_decision_to_pursue_a_PhD, y = !!sym(yaxis))) +
-    geom_jitter(alpha = 0.1) +
+    geom_jitter(alpha = 0.12) +
     xlab("Satisfaction with decicsion to pursure a PhD") +
     ylab(y_label) +
     ggtitle(paste0("Self-reported sastifaction with decision to pursue a PhD vs ", y_label, " \n (1 being lowest rating)")) +
@@ -48,7 +48,9 @@ make_plot <- function(yaxis = "Quality of Supervisor Relationship"){
   ggplotly(p)
 }
 
-
+# make_plot2 <- function(){
+#   
+# }
 
 # "happiness variables" plots: satisfaction_now x
 ## 1 contact hours (x axis would be the different contact hours values, y axis is %, and then bars are coloured by level of satisfaction)
@@ -86,7 +88,7 @@ graph <- dccGraph(
 div_header <- htmlDiv(
   list(heading_title,
        heading_subtitle
-  ), style = list(backgroundColor = '#4F77BC',
+  ), style = list(backgroundColor = '#2D4075',
                   textAlign = 'left',
                   color = 'white',
                   margin = 0,
@@ -115,7 +117,10 @@ div_main <- htmlDiv(
        htmlBr(),
        yaxisDropdown,
        htmlBr(),
-       graph
+       graph,
+       htmlBr(),
+       htmlBr()
+       #graph2
   ), style = list('flex-basis' = '60%')
 )
 
@@ -136,7 +141,7 @@ app$layout(
 
 # CALLBACKS
 app$callback(
-  #update figure of gap-graph
+  #update figure of satisfaction-graph
   output=list(id = 'satisfaction-graph', property='figure'),
   #based on values of year, continent, y-axis components
   params=list(input(id = 'y-axis', property='value')),
@@ -147,7 +152,7 @@ app$callback(
 
 
 # RUN APP
-app$run_server(debug=TRUE)
+app$run_server(debug=FALSE)
 
 # command to add dash app in Rstudio viewer:
 # rstudioapi::viewer("http://127.0.0.1:8050")
