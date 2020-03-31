@@ -60,7 +60,7 @@ make_plot <- function(yaxis = "Quality of Supervisor Relationship"){
 # ASSIGN COMPONENTS TO VARIABLES
 heading_title <- htmlH1('Finding satisfaction in your PhD')
 heading_subtitle <- htmlH2('A data based approach to the sources of satisfaction in graduate school')
-description <- dccMarkdown("[description of dataset needed here]")
+description <- dccMarkdown("description of dataset needed here")
 source <- dccMarkdown("[Data Source](https://www.nature.com/articles/d41586-019-03459-7)")
 
 graph <- dccGraph(
@@ -74,13 +74,11 @@ graph <- dccGraph(
 div_header <- htmlDiv(
   list(heading_title,
        heading_subtitle
-  ), style = list(
-    backgroundColor = '#337DFF', ## COLOUR OF YOUR CHOICE
-    textAlign = 'center',
-    color = 'white',
-    margin = 5,
-    marginTop = 0
-  )
+  ), style = list(backgroundColor = '#4F77BC',
+                  textAlign = 'left',
+                  color = 'white',
+                  margin = 0,
+                  marginTop = 0)
 )
 
 div_sidebar <- htmlDiv(
@@ -89,14 +87,19 @@ div_sidebar <- htmlDiv(
        htmlBr(),
        htmlBr(),
        source
-  ), style = list('flex-basis' = '30%')
+  ), style = list('flex-basis' = '15%',
+                  backgroundColor = '#C0476B',
+                  textAlign = 'left',
+                  color = 'white',
+                  margin = 0,
+                  marginTop = 0)
 )
 
 div_main <- htmlDiv(
   list(htmlLabel('Select predictor of satisfaction:'),
        yaxisDropdown,
        graph
-  )
+  ), style = list('flex-basis' = '60%')
 )
 
 
@@ -108,7 +111,8 @@ app$layout(
     list(
       div_sidebar,
       div_main
-    ), style = list('display' = 'flex')
+    ), style = list('display' = 'flex',
+                    backgroundColor = '#FOF6F7FF')
   )
 )
 
