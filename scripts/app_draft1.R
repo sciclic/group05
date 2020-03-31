@@ -60,27 +60,58 @@ make_plot <- function(yaxis = "Quality of Supervisor Relationship"){
 # ASSIGN COMPONENTS TO VARIABLES
 heading_title <- htmlH1('Finding satisfaction in your PhD')
 heading_subtitle <- htmlH2('A data based approach to the sources of satisfaction in graduate school')
+description <- dccMarkdown("[description of dataset needed here]")
+source <- dccMarkdown("[Data Source](https://www.nature.com/articles/d41586-019-03459-7)")
 
 graph <- dccGraph(
   id = 'satisfaction-graph',
   figure = make_plot() # gets initial data using argument defaults
 )
 
+
+# SPECIFY LAYOUT ELEMENTS
+
+div_header <- htmlDiv(
+  list(heading_title,
+       heading_subtitle
+  ), style = list(
+    backgroundColor = '#337DFF', ## COLOUR OF YOUR CHOICE
+    textAlign = 'center',
+    color = 'white',
+    margin = 5,
+    marginTop = 0
+  )
+)
+
+div_sidebar <- htmlDiv(
+  list(
+       description,
+       htmlBr(),
+       htmlBr(),
+       source
+  ), style = list('flex-basis' = '30%')
+)
+
+div_main <- htmlDiv(
+  list(htmlLabel('Select predictor of satisfaction:'),
+       yaxisDropdown,
+       graph
+  )
+)
+
+
 # SPECIFY APP LAYOUT
 
 app$layout(
+  div_header,
   htmlDiv(
     list(
-      heading_title,
-      heading_subtitle,
-      #graphs and markdown components
-      htmlLabel('Select predictor of satisfaction:'),
-      yaxisDropdown,
-      graph,
-      htmlIframe(height=30, width=6, style=list(borderWidth = 0))
-    )
+      div_sidebar,
+      div_main
+    ), style = list('display' = 'flex')
   )
 )
+
 
 # CALLBACKS
 app$callback(
@@ -95,7 +126,7 @@ app$callback(
 
 
 # RUN APP
-app$run_server(debug=TRUE)
+app$run_server(debug=FALSE)
 
 # command to add dash app in Rstudio viewer:
 # rstudioapi::viewer("http://127.0.0.1:8050")
