@@ -60,7 +60,19 @@ make_plot <- function(yaxis = "Quality of Supervisor Relationship"){
 # ASSIGN COMPONENTS TO VARIABLES
 heading_title <- htmlH1('Finding satisfaction in your PhD')
 heading_subtitle <- htmlH2('A data based approach to the sources of satisfaction in graduate school')
-description <- dccMarkdown("description of dataset needed here")
+description <- dccMarkdown("In Nature's yearly survey of over 6000 graduate students, 
+positives outweigh the negatives. 
+75% of students pursuing graduate research are at least somewhat satisfied with their decision to pursue a career on doctoral research. 
+Nonetheless, survey questions that dig into the mental health toll of this career path reveal a perilous journey for most. 
+With 36% of respondents reporting the need to seek help for anxiety or depression triggered by their studies, 
+and a similar percentage declaring that their university does not promote a healthy work-life balance, 
+survey answers in this area raise concerns about the mental health status of doctoral students. 
+Harrasment and bullying also remain distressingly commonplace.
+
+In our project, we aim to investigate the relationship between these two question areas 
+(mental health & feelings of harrasment/bullying) and other variables that we hypothesise may be related to positive and/or negative outcomes. 
+For example, are those pursuing a degree far from home more likely to suffer from anxiety and depression? Are instances of harrasment and/or bullying male-biased? 
+In an effort to shed some light into the matter, we will study these questions in detail.")
 source <- dccMarkdown("[Data Source](https://www.nature.com/articles/d41586-019-03459-7)")
 
 graph <- dccGraph(
@@ -94,11 +106,12 @@ div_sidebar <- htmlDiv(
                   color = 'white',
                   margin = 5,
                   marginTop = 0,
-                  'padding' = 8)
+                  'padding' = 10)
 )
 
 div_main <- htmlDiv(
-  list(htmlLabel('Select predictor of satisfaction:'),
+  list(htmlBr(),
+       htmlLabel('Select predictor of satisfaction:'),
        htmlBr(),
        yaxisDropdown,
        htmlBr(),
