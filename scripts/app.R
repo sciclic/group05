@@ -29,21 +29,22 @@ make_plot <- function(yaxis = "supervisor_relationship"){
   p <- ggplot(data, aes(x = satisfaction_decision, y = !!sym(yaxis))) +
     geom_jitter(alpha = 0.12,
                 color = "#E6C350") +
-    theme(axis.text.y=element_text(angle = 45)) +
-    xlab("Satisfaction with decision to pursure a PhD") +
+    xlab("Satisfaction with decision to pursue a PhD") +
     ylab(y_label) +
     ggtitle(paste0("Self-reported satisfaction with decision to pursue a PhD vs ", y_label, " \n (1 being lowest rating)")) +
-    theme_minimal()
+    theme_minimal() +
+    theme(axis.text.x=element_text(angle = 30, hjust=1))
   
   # passing c("text") into tooltip only shows the contents of the "text" aesthetic specified above
   ggplotly(p)
 }
 
 # plot 2 
-satisfaction_decision <- function(ageslider = "18 - 24"){
-  
+satisfaction_decision <- function(ageslider = "1"){
+  sliderTibble <- tibble(label = levels(survey_data$age), value = c(1:length(levels(survey_data$age))))
+  slider_label <- sliderTibble$label[sliderTibble$value == ageslider]
   p1 <- survey_data %>% 
-    filter(age == ageslider) %>%
+    filter(age == slider_label) %>%
     ggplot(aes(y=satisfaction_decision, fill=satisfaction_decision)) + 
     geom_bar() +
     scale_fill_simpsons(alpha=0.6) +
@@ -77,19 +78,15 @@ yaxisDropdown <- dccDropdown(
 
 # SLIDER
 # quickly drop the 'prefer not to say'
-x <- levels(survey_data$age)
-is.na(x) <- x == "Prefer not to say"
-x <- x[!is.na(x)]
-ageKey <- tibble(label = x,
-                 value = c(1, 2, 3, 4, 5, 6))
-ageKey
+x <- c("18-24","25-34","35-44","45-54","55-64",">65")
 slider <- dccSlider(id='ageslider',
                     min=1,
-                    max=length(ageKey),
-                    marks = setNames(as.list(ageKey), 
-                                     c(1:length(ageKey))),
-                    value = 1
+                    max=length(x),
+                    marks = setNames(as.list(x), 
+                                     c(1:length(x))),
+                    value = "1"
 )
+
 
 # ASSIGN COMPONENTS TO VARIABLES
 heading_title <- htmlH1('Finding satisfaction in your PhD')
@@ -169,19 +166,6 @@ div_main <- htmlDiv(
                   'justify-content' = 'center',
                   'padding' = 20)
 )
-
-# div_main1 <- htmlDiv(
-#   list(htmlBr(),
-#        htmlLabel('Filter by age range :'),
-#        slider,
-#        htmlBr(),
-#        satisfaction_decision,
-#        htmlBr(),
-#        htmlBr()
-#   ), style = list('flex-basis' = '50%',
-#                   'justify-content' = 'center',
-#                   'padding' = 10)
-# )
 
 
 # SPECIFY APP LAYOUT
