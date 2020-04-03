@@ -3,6 +3,7 @@ library(dashCoreComponents)
 library(dashHtmlComponents)
 library(dashTable)
 library(tidyverse)
+library(ggplot2)
 library(plotly)
 library(ggsci)
 library(gapminder)
@@ -75,13 +76,19 @@ yaxisDropdown <- dccDropdown(
 )
 
 # SLIDER
-ageKey <- levels(survey_data$age)
+# quickly drop the 'prefer not to say'
+x <- levels(survey_data$age)
+is.na(x) <- x == "Prefer not to say"
+x <- x[!is.na(x)]
+ageKey <- tibble(label = x,
+                 value = c(1, 2, 3, 4, 5, 6))
+ageKey
 slider <- dccSlider(id='ageslider',
                     min=1,
                     max=length(ageKey),
                     marks = setNames(as.list(ageKey), 
                                      c(1:length(ageKey))),
-                    value = 2
+                    value = 1
 )
 
 # ASSIGN COMPONENTS TO VARIABLES
@@ -128,10 +135,13 @@ div_header <- htmlDiv(
 div_sidebar <- htmlDiv(
   list(
     description,
+    
     htmlBr(),
+    
     htmlBr(),
+    
     source
-  ), style = list('flex-basis' = '15%',
+  ), style = list('flex-basis' = '25%',
                   backgroundColor = '#A8A497',
                   textAlign = 'left',
                   color = 'white',
@@ -148,7 +158,7 @@ div_main <- htmlDiv(
        graph,
        htmlBr(),
        htmlBr(),
-       htmlBR(),
+       htmlBr(),
        htmlLabel('Filter by age range :'),
        slider,
        htmlBr(),
