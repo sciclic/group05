@@ -40,7 +40,7 @@ make_plot <- function(yaxis = "supervisor_relationship"){
 }
 
 # plot 2 
-satisfaction_decision <- function(ageslider = "1"){
+make_plot2 <- function(ageslider = "1"){
   sliderTibble <- tibble(label = levels(survey_data$age), value = c(1:length(levels(survey_data$age))))
   slider_label <- sliderTibble$label[sliderTibble$value == ageslider]
   p1 <- survey_data %>% 
@@ -110,9 +110,9 @@ graph <- dccGraph(
   figure = make_plot() # gets initial data using argument defaults
 )
 
-satisfaction_decision <- dccGraph(
-  id = 'satisfaction_decision',
-  figure = satisfaction_decision() # gets initial data using argument defaults
+graph2 <- dccGraph(
+  id = 'satisfaction-graph2',
+  figure = make_plot2() # gets initial data using argument defaults
 )
 
 
@@ -159,7 +159,7 @@ div_main <- htmlDiv(
        htmlLabel('Filter by age range :'),
        slider,
        htmlBr(),
-       satisfaction_decision,
+       graph2,
        htmlBr(),
        htmlBr()
   ), style = list('flex-basis' = '70%',
@@ -196,12 +196,12 @@ app$callback(
 
 app$callback(
   #update figure of satisfaction_decision
-  output=list(id = 'satisfaction_decision', property='figure'),
+  output=list(id = 'satisfaction-graph2', property='figure'),
   #based on values of age slider
   params=list(input(id = 'ageslider', property='value')),
   #this translates your list of params into function arguments
   function(ageslider_value) {
-    satisfaction_decision(ageslider_value)
+    make_plot2(ageslider_value)
   })
 
 
