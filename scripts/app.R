@@ -26,16 +26,24 @@ make_plot <- function(yaxis = "supervisor_relationship"){
   
   # gets the label matching the column value
   data <- survey_data
-  p <- ggplot(data, aes(x = satisfaction_decision, y = !!sym(yaxis))) +
+  
+  #re-ordering levels of some survey_data items for correct plot axis ordering
+  # data %>%
+  #   mutate(name = fct_relevel(satisfaction_decision, 
+  #                             "Very dissatisfied", "Somewhat dissatisfied", "Neither satisfied nor dissatisfied", 
+  #                             "Somewhat satisfied", "Very satisfied"))
+  
+    p <- ggplot(data, aes(x = satisfaction_decision, y = !!sym(yaxis))) +
     geom_jitter(alpha = 0.12,
                 color = "#E6C350") +
     xlab("Satisfaction with decision to pursue a PhD") +
     ylab(y_label) +
     ggtitle(paste0("Self-reported satisfaction with decision to pursue a PhD vs ", y_label, " \n (1 being lowest rating)")) +
     theme_minimal() +
-    theme(axis.text.x=element_text(angle = 30, hjust=1))
+    theme(axis.text.x=element_text(angle = 30, hjust=1)) +
+    scale_x_discrete(limits = c("Very dissatisfied", "Somewhat dissatisfied", "Neither satisfied nor dissatisfied",
+                                "Somewhat satisfied", "Very satisfied")) 
   
-  # passing c("text") into tooltip only shows the contents of the "text" aesthetic specified above
   ggplotly(p)
 }
 
@@ -162,7 +170,7 @@ div_main <- htmlDiv(
        graph2,
        htmlBr(),
        htmlBr()
-  ), style = list('flex-basis' = '70%',
+  ), style = list('flex-basis' = '60%',
                   'justify-content' = 'center',
                   'padding' = 20)
 )
