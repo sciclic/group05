@@ -27,12 +27,17 @@ make_plot <- function(yaxis = "supervisor_relationship"){
   # gets the label matching the column value
   data <- survey_data
   
-  #re-ordering levels of some survey_data items for correct plot axis ordering
-  # data %>%
-  #   mutate(name = fct_relevel(satisfaction_decision, 
-  #                             "Very dissatisfied", "Somewhat dissatisfied", "Neither satisfied nor dissatisfied", 
-  #                             "Somewhat satisfied", "Very satisfied"))
+  # Function takes in the selected y-axis variable and returns a vector of the variable's correct item order (lowest to highest)
+  y_levels <- function(y){
+    if (y == "supervisor_relationship" | y == "work_life_balance"){
+      item_levels = c("1 = Not at all satisfied", "2", "3", "4 = Neither satisfied nor dissatisfied", "5", "6", "7 = Extremely satisfied")
+    } else {
+      item_levels = c("Strongly disagree", "Somewhat disagree", "Neither agree nor disagree", "Somewhat agree", "Strongly agree")
+    }
+    return(item_levels)
+  }
   
+  # Creates ggplot, satisfaction with decision on the x-axis, y-axis being variable selected by user
     p <- ggplot(data, aes(x = satisfaction_decision, y = !!sym(yaxis))) +
     geom_jitter(alpha = 0.12,
                 color = "#E6C350") +
@@ -42,7 +47,8 @@ make_plot <- function(yaxis = "supervisor_relationship"){
     theme_minimal() +
     theme(axis.text.x=element_text(angle = 30, hjust=1)) +
     scale_x_discrete(limits = c("Very dissatisfied", "Somewhat dissatisfied", "Neither satisfied nor dissatisfied",
-                                "Somewhat satisfied", "Very satisfied")) 
+                                "Somewhat satisfied", "Very satisfied")) +
+    scale_y_discrete(limits = y_levels(yaxis))
   
   ggplotly(p)
 }
