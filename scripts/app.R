@@ -26,19 +26,39 @@ make_plot <- function(yaxis = "supervisor_relationship"){
   
   # gets the label matching the column value
   data <- survey_data
-  p <- ggplot(data, aes(x = satisfaction_decision, y = !!sym(yaxis))) +
-    geom_jitter(alpha = 0.12,
-                color = "#E6C350") +
+  
+  # Function takes in the selected y-axis variable and returns a vector of the variable's correct item order (lowest to highest)
+  y_levels <- function(y){
+    if (y == "supervisor_relationship" | y == "work_life_balance"){
+      item_levels = c("1 = Not at all satisfied", "2", "3", "4 = Neither satisfied nor dissatisfied", "5", "6", "7 = Extremely satisfied")
+    } else {
+      item_levels = c("Strongly disagree", "Somewhat disagree", "Neither agree nor disagree", "Somewhat agree", "Strongly agree")
+    }
+    return(item_levels)
+  }
+  
+  # Creates ggplot, satisfaction with decision on the x-axis, y-axis being variable selected by user
+    p <- ggplot(data, aes(x = satisfaction_decision, y = !!sym(yaxis), na.rm = TRUE)) +
+    geom_jitter(alpha = 0.15,
+                color = "#E6C350",
+                position = position_jitter(w = .45, h = .4)) +
+    geom_boxplot() +
     xlab("Satisfaction with decision to pursue a PhD") +
     ylab(y_label) +
-    ggtitle(paste0("Self-reported satisfaction with decision to pursue a PhD vs ", y_label, " \n (1 being lowest rating)")) +
+    ggtitle(paste0("Self-reported satisfaction with decision to pursue a PhD \n vs ", y_label)) +
     theme_minimal() +
-    theme(axis.text.x=element_text(angle = 30, hjust=1))
+    theme(axis.text.x = element_text(angle = 30, hjust=1),
+          #axis.text.y = element_text(angle = 90, hjust=1),
+          plot.title = element_text(size = 14, hjust = 0),
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank()) +
+    scale_x_discrete(limits = c("Very dissatisfied", "Somewhat dissatisfied", "Neither satisfied nor dissatisfied",
+                                "Somewhat satisfied", "Very satisfied")) +
+    scale_y_discrete(limits = y_levels(yaxis))
   
-  # passing c("text") into tooltip only shows the contents of the "text" aesthetic specified above
   ggplotly(p)
 }
-
+ 
 # plot 2 
 make_plot2 <- function(ageslider = "1"){
   sliderTibble <- tibble(label = levels(survey_data$age), value = c(1:length(levels(survey_data$age))))
@@ -162,7 +182,7 @@ div_main <- htmlDiv(
        graph2,
        htmlBr(),
        htmlBr()
-  ), style = list('flex-basis' = '70%',
+  ), style = list('flex-basis' = '60%',
                   'justify-content' = 'center',
                   'padding' = 20)
 )
