@@ -1,0 +1,9 @@
+{
+  "name": "Deploying DashR 'Finding Satisfaction in your PhD' app to heroku",
+  "description": "This app explores Nature's graduate school survey for satisfaction varialbes.",
+  "keywords": [
+    "heroku",
+    "R deployment",
+    "Dash R"
+    ],
+}
