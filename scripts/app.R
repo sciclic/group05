@@ -3,6 +3,7 @@ library(dashCoreComponents)
 library(dashHtmlComponents)
 library(dashTable)
 library(tidyverse)
+library(ggplot2)
 library(plotly)
 library(ggsci)
 library(gapminder)
@@ -25,24 +26,45 @@ make_plot <- function(yaxis = "supervisor_relationship"){
   
   # gets the label matching the column value
   data <- survey_data
-  p <- ggplot(data, aes(x = satisfaction_decision, y = !!sym(yaxis))) +
-    geom_jitter(alpha = 0.12,
-                color = "#E6C350") +
-    theme(axis.text.y=element_text(angle = 45)) +
-    xlab("Satisfaction with decision to pursure a PhD") +
-    ylab(y_label) +
-    ggtitle(paste0("Self-reported satisfaction with decision to pursue a PhD vs ", y_label, " \n (1 being lowest rating)")) +
-    theme_minimal()
   
-  # passing c("text") into tooltip only shows the contents of the "text" aesthetic specified above
+  # Function takes in the selected y-axis variable and returns a vector of the variable's correct item order (lowest to highest)
+  y_levels <- function(y){
+    if (y == "supervisor_relationship" | y == "work_life_balance"){
+      item_levels = c("1 = Not at all satisfied", "2", "3", "4 = Neither satisfied nor dissatisfied", "5", "6", "7 = Extremely satisfied")
+    } else {
+      item_levels = c("Strongly disagree", "Somewhat disagree", "Neither agree nor disagree", "Somewhat agree", "Strongly agree")
+    }
+    return(item_levels)
+  }
+  
+  # Creates ggplot, satisfaction with decision on the x-axis, y-axis being variable selected by user
+    p <- ggplot(data, aes(x = satisfaction_decision, y = !!sym(yaxis), na.rm = TRUE)) +
+    geom_jitter(alpha = 0.15,
+                color = "#E6C350",
+                position = position_jitter(w = .45, h = .4)) +
+    geom_boxplot() +
+    xlab("Satisfaction with decision to pursue a PhD") +
+    ylab(y_label) +
+    ggtitle(paste0("Self-reported satisfaction with decision to pursue a PhD \n vs ", y_label)) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 30, hjust=1),
+          #axis.text.y = element_text(angle = 90, hjust=1),
+          plot.title = element_text(size = 14, hjust = 0),
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank()) +
+    scale_x_discrete(limits = c("Very dissatisfied", "Somewhat dissatisfied", "Neither satisfied nor dissatisfied",
+                                "Somewhat satisfied", "Very satisfied")) +
+    scale_y_discrete(limits = y_levels(yaxis))
+  
   ggplotly(p)
 }
-
+ 
 # plot 2 
-satisfaction_decision <- function(ageslider = "18 - 24"){
-  
+make_plot2 <- function(ageslider = "1"){
+  sliderTibble <- tibble(label = levels(survey_data$age), value = c(1:length(levels(survey_data$age))))
+  slider_label <- sliderTibble$label[sliderTibble$value == ageslider]
   p1 <- survey_data %>% 
-    filter(age == ageslider) %>%
+    filter(age == slider_label) %>%
     ggplot(aes(y=satisfaction_decision, fill=satisfaction_decision)) + 
     geom_bar() +
     scale_fill_simpsons(alpha=0.6) +
@@ -75,14 +97,16 @@ yaxisDropdown <- dccDropdown(
 )
 
 # SLIDER
-ageKey <- levels(survey_data$age)
+# quickly drop the 'prefer not to say'
+x <- c("18-24","25-34","35-44","45-54","55-64",">65")
 slider <- dccSlider(id='ageslider',
                     min=1,
-                    max=length(ageKey),
-                    marks = setNames(as.list(ageKey), 
-                                     c(1:length(ageKey))),
-                    value = 2
+                    max=length(x),
+                    marks = setNames(as.list(x), 
+                                     c(1:length(x))),
+                    value = "1"
 )
+
 
 # ASSIGN COMPONENTS TO VARIABLES
 heading_title <- htmlH1('Finding satisfaction in your PhD')
@@ -106,9 +130,9 @@ graph <- dccGraph(
   figure = make_plot() # gets initial data using argument defaults
 )
 
-satisfaction_decision <- dccGraph(
-  id = 'satisfaction_decision',
-  figure = satisfaction_decision() # gets initial data using argument defaults
+graph2 <- dccGraph(
+  id = 'satisfaction-graph2',
+  figure = make_plot2() # gets initial data using argument defaults
 )
 
 
@@ -128,10 +152,13 @@ div_header <- htmlDiv(
 div_sidebar <- htmlDiv(
   list(
     description,
+    
     htmlBr(),
+    
     htmlBr(),
+    
     source
-  ), style = list('flex-basis' = '15%',
+  ), style = list('flex-basis' = '25%',
                   backgroundColor = '#A8A497',
                   textAlign = 'left',
                   color = 'white',
@@ -148,30 +175,17 @@ div_main <- htmlDiv(
        graph,
        htmlBr(),
        htmlBr(),
-       htmlBR(),
+       htmlBr(),
        htmlLabel('Filter by age range :'),
        slider,
        htmlBr(),
-       satisfaction_decision,
+       graph2,
        htmlBr(),
        htmlBr()
-  ), style = list('flex-basis' = '70%',
+  ), style = list('flex-basis' = '60%',
                   'justify-content' = 'center',
                   'padding' = 20)
 )
-
-# div_main1 <- htmlDiv(
-#   list(htmlBr(),
-#        htmlLabel('Filter by age range :'),
-#        slider,
-#        htmlBr(),
-#        satisfaction_decision,
-#        htmlBr(),
-#        htmlBr()
-#   ), style = list('flex-basis' = '50%',
-#                   'justify-content' = 'center',
-#                   'padding' = 10)
-# )
 
 
 # SPECIFY APP LAYOUT
@@ -202,12 +216,12 @@ app$callback(
 
 app$callback(
   #update figure of satisfaction_decision
-  output=list(id = 'satisfaction_decision', property='figure'),
+  output=list(id = 'satisfaction-graph2', property='figure'),
   #based on values of age slider
   params=list(input(id = 'ageslider', property='value')),
   #this translates your list of params into function arguments
   function(ageslider_value) {
-    satisfaction_decision(ageslider_value)
+    make_plot2(ageslider_value)
   })
 
 
