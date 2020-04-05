@@ -58,7 +58,7 @@ make_plot <- function(yaxis = "supervisor_relationship"){
   
   ggplotly(p)
 }
-
+ 
 # plot 2 
 make_plot2 <- function(ageslider = "1"){
   sliderTibble <- tibble(label = levels(survey_data$age), value = c(1:length(levels(survey_data$age))))
